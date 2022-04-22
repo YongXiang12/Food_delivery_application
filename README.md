@@ -9,3 +9,4 @@
 
 側邊選單點login 開啟新loginActivity
 點pizza 開啟新storeActivity
+miniSDK 22
