@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         Toolbar tb = (Toolbar) findViewById(R.id.toolbar);
 
-        tb.setNavigationIcon(R.drawable.ic_baseline_add_shopping_cart_24);
         setSupportActionBar(tb);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
