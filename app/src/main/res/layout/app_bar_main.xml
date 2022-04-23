@@ -10,32 +10,50 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/no3"
+        android:background="@color/orange"
         android:theme="@style/Theme.Nav4.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/no3"
+            android:background="@color/orange"
             app:popupTheme="@style/Theme.Nav4.PopupOverlay">
 
-
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Diliver to ..........................................................">
+                android:layout_gravity="center"
+                android:orientation="vertical">
 
-            </TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Diliver to"></TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="台中市西屯區文華路2號"></TextView>
+            </LinearLayout>
+
 
             <ImageView
                 android:id="@+id/toolbar_pro_img"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp"
                 android:contentDescription="@string/nav_header_desc"
-                android:paddingTop="@dimen/nav_header_vertical_spacing"
                 app:srcCompat="@drawable/toolbar_user" />
         </androidx.appcompat.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"></LinearLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
