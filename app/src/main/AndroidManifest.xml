@@ -10,13 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nav4">
         <activity
-            android:name="fcu.mp110.food_delivery_app.ui.store.StoreActivity"
+            android:name=".RestaurantMenu"
             android:exported="false" />
         <activity
-            android:name="fcu.mp110.food_delivery_app.ui.login.LoginActivity"
+            android:name=".ui.store.StoreActivity"
             android:exported="false" />
         <activity
-            android:name="fcu.mp110.food_delivery_app.MainActivity"
+            android:name=".ui.login.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Nav4.NoActionBar">

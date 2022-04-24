@@ -11,3 +11,5 @@ miniSDK 22,
   
 側邊選單點login 開啟新loginActivity ,
 點pizza 開啟新storeActivity ,
+
+餐廳菜單頁面restaurant_manu, rounded_conner用來做圓角
