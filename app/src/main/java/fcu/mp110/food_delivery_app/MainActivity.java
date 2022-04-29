@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -20,6 +19,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import fcu.mp110.food_delivery_app.databinding.ActivityMainBinding;
+import fcu.mp110.food_delivery_app.ui.search.SearchPage;
 import fcu.mp110.food_delivery_app.ui.store.StoreActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -74,6 +74,19 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(it);
             }
         });
+
+
+        // Search TextField init
+        TextView Search_TextField = findViewById(R.id.Search_TextField);
+        Search_TextField.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick (View view){
+                Intent it = new Intent(MainActivity.this, SearchPage.class);
+                startActivity(it);
+            }
+        });
+
 
         /*ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, tb, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
