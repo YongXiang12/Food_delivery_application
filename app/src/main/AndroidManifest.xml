@@ -13,7 +13,7 @@
             android:name=".ui.search.SearchPage"
             android:exported="false" />
         <activity
-            android:name=".RestaurantMenu"
+            android:name=".ui.restaurant.RestaurantMenu"
             android:exported="false" />
         <activity
             android:name=".ui.store.StoreActivity"

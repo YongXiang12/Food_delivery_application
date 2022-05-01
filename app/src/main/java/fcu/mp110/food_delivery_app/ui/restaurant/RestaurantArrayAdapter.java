@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import fcu.mp110.food_delivery_app.R;
-import fcu.mp110.food_delivery_app.RestaurantMenu;
 
 public class RestaurantArrayAdapter extends RecyclerView.Adapter<RestaurantArrayAdapter.ViewHolder> {
     public List<StoreItem> storeItemList;
