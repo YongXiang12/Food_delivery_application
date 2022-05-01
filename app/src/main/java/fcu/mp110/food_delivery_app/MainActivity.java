@@ -17,8 +17,14 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 
 import fcu.mp110.food_delivery_app.databinding.ActivityMainBinding;
+import fcu.mp110.food_delivery_app.ui.restaurant.RestaurantArrayAdapter;
+import fcu.mp110.food_delivery_app.ui.restaurant.StoreItem;
 import fcu.mp110.food_delivery_app.ui.search.SearchPage;
 import fcu.mp110.food_delivery_app.ui.store.StoreActivity;
 
@@ -26,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +57,11 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        /*ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, tb, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+        tb.setNavigationIcon(R.drawable.ic_option);*/
 
         //測試改變右上個人圖片
         /*ImageView pro_img = (ImageView) findViewById(R.id.toolbar_pro_img);
@@ -65,35 +77,38 @@ public class MainActivity extends AppCompatActivity {
         drawer_name.setText("Alan");
         drawer_email.setText("aa@gmail.com");
 
-        //測試點圖片開啟店家
-        ImageView img = (ImageView) findViewById(R.id.main_pizza);
-        img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent it = new Intent(MainActivity.this, StoreActivity.class);
-                startActivity(it);
-            }
-        });
-
 
         // Search TextField init
         TextView Search_TextField = findViewById(R.id.Search_TextField);
-        Search_TextField.setOnClickListener(new View.OnClickListener(){
+        Search_TextField.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick (View view){
+            public void onClick(View view) {
                 Intent it = new Intent(MainActivity.this, SearchPage.class);
                 startActivity(it);
             }
         });
 
+        //FeaturedRestaurant 可右滑recyclerview
+        initFeaturedRestaurant();
 
-        /*ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, tb, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-        tb.setNavigationIcon(R.drawable.ic_option);*/
     }
+
+    public void initFeaturedRestaurant() {
+        //setOnClickListener();
+        RecyclerView recyclerViewStore = this.findViewById(R.id.store_recyclerview);
+        ArrayList<StoreItem> storeList = new ArrayList<StoreItem>();
+        storeList.add(new StoreItem(R.drawable.ic_mcdonald, "5.0", "A", "麥當勞", "hamburger"));
+        storeList.add(new StoreItem(R.drawable.hawwaipizza, "5.0", "B", "達美樂", "pizza"));
+        storeList.add(new StoreItem(R.drawable.seafood_pizza, "5.0", "B", "BB", "hamburger"));
+        storeList.add(new StoreItem(R.drawable.seafood_pizza, "5.0", "B", "BB", "hamburger"));
+        storeList.add(new StoreItem(R.drawable.seafood_pizza, "5.0", "B", "BB", "hamburger"));
+        RestaurantArrayAdapter adapter = new RestaurantArrayAdapter(this, storeList);
+
+        recyclerViewStore.setAdapter(adapter);
+        recyclerViewStore.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
