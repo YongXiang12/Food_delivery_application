@@ -13,3 +13,5 @@ miniSDK 22,
 點pizza 開啟新storeActivity ,
 
 餐廳菜單頁面restaurant_manu, rounded_conner用來做圓角
+
+餐廳列表onClick處理在 RestaurantArrayAdapter.java
