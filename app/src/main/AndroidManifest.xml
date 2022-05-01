@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nav4">
         <activity
+            android:name=".ui.search.SearchResultPage"
+            android:exported="false" />
+        <activity
             android:name=".ui.search.SearchPage"
             android:exported="false" />
         <activity
