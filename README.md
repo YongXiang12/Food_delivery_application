@@ -60,3 +60,37 @@
   <td>User(Order) -001</td>
 </tr>
 </table>
+
+# 2022-05-16
+<table>
+<tr>
+  <td>組員姓名</td>
+  <td>學號</td>
+  <td>GitHub帳號</td>
+  <td>Issues</td>
+</tr>
+<tr>
+  <td>徐品鈞</td>
+  <td>D0852825</td>
+  <td>maxchenzzz</td>
+  <td>Issues</td>
+</tr>
+<tr>
+  <td>張詠翔</td>
+  <td>D0975253</td>
+  <td>YongXiang12</td>
+  <td>User(Store) -002</td>
+</tr>
+<tr>
+  <td>駱正彧</td>
+  <td>D0852620</td>
+  <td>Samel0731</td>
+  <td>User(Order) -007</td>
+</tr>
+<tr>
+  <td>張洸瑋</td>
+  <td>D0977597</td>
+  <td>rickychang666666</td>
+  <td>Issues</td>
+</tr>
+</table>
