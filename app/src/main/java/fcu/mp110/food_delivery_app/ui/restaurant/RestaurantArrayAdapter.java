@@ -49,6 +49,8 @@ public class RestaurantArrayAdapter extends RecyclerView.Adapter<RestaurantArray
         public void onClick(View view) {
             int pos = getAdapterPosition();
             Intent intent = new Intent(context, RestaurantMenu.class);
+            intent.putExtra("storename", storeItemList.get(pos).getStoreName());
+            intent.putExtra("storepicture", storeItemList.get(pos).getStoreImgResId());
             context.startActivity(intent);
         }
     }

@@ -22,15 +22,16 @@
                 android:id="@+id/imv_back"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="10dp"
                 android:layout_alignParentLeft="true"
-                android:src="@drawable/icons8_back_48px"/>
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:onClick="goBack"
+                android:src="@drawable/icons8_back_48px" />
 
             <ImageView
                 android:id="@+id/imv_thumbnail"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="160dp"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/hawwaipizza" />
 
