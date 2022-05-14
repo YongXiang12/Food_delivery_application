@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nav4">
         <activity
+            android:name=".ui.restaurant.ReviewActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.restaurant.FoodDetailsActivity"
             android:exported="false" />
         <activity
