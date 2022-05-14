@@ -2,9 +2,11 @@ package fcu.mp110.food_delivery_app.ui.restaurant;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -46,6 +48,14 @@ public class RestaurantMenu extends AppCompatActivity {
         // create a object of myBaseAdapter
         RestaurantMenuBaseAdapter baseAdapter = new RestaurantMenuBaseAdapter(this, itemsarray);
         gridView.setAdapter(baseAdapter);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //intent
+                Intent intent = new Intent(RestaurantMenu.this, FoodDetailsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void goBack(View view)
