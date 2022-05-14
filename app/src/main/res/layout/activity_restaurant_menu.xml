@@ -12,9 +12,9 @@
 
         <RelativeLayout
             android:id="@+id/info"
-            android:layout_alignParentTop="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:paddingLeft="16dp"
             android:paddingRight="16dp">
 
@@ -58,8 +58,8 @@
                 android:id="@+id/txv_mark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_below="@+id/txv_store_name"
+                android:layout_marginTop="10dp"
                 android:layout_toRightOf="@+id/imv_star"
                 android:hint="4.5 (30+)"
                 android:paddingLeft="5dp"
@@ -89,9 +89,9 @@
                 android:id="@+id/txv_delivery_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_below="@+id/imv_star"
                 android:layout_alignParentLeft="true"
+                android:layout_marginTop="10dp"
                 android:hint="外送30分鐘"
                 android:textSize="20dp" />
 
@@ -100,8 +100,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txv_delivery_time"
-                android:layout_marginTop="8dp"
                 android:layout_alignParentLeft="true"
+                android:layout_marginTop="8dp"
                 android:text="@string/txv_label_popularity"
                 android:textSize="20dp" />
         </RelativeLayout>
