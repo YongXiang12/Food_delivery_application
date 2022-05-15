@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
@@ -23,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import fcu.mp110.food_delivery_app.databinding.ActivityMainBinding;
+import fcu.mp110.food_delivery_app.ui.order.OrderStatusActivity;
 import fcu.mp110.food_delivery_app.ui.restaurant.RestaurantArrayAdapter;
 import fcu.mp110.food_delivery_app.ui.restaurant.StoreItem;
 import fcu.mp110.food_delivery_app.ui.search.SearchPage;
