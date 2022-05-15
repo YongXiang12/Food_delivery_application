@@ -36,7 +36,7 @@
                 android:src="@drawable/hawwaipizza" />
 
             <TextView
-                android:id="@+id/txv_store_name"
+                android:id="@+id/txv_dish"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imv_thumbnail"
@@ -49,7 +49,7 @@
                 android:id="@+id/imv_star"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_below="@+id/txv_store_name"
+                android:layout_below="@+id/txv_dish"
                 android:layout_alignParentLeft="true"
                 android:layout_marginTop="10dp"
                 android:src="@drawable/icons8_star_96px" />
@@ -58,7 +58,7 @@
                 android:id="@+id/txv_mark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txv_store_name"
+                android:layout_below="@+id/txv_dish"
                 android:layout_marginTop="10dp"
                 android:layout_toRightOf="@+id/imv_star"
                 android:hint="4.5 (30+)"
@@ -69,7 +69,7 @@
                 android:id="@+id/txv_see_review"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txv_store_name"
+                android:layout_below="@+id/txv_dish"
                 android:layout_marginTop="10dp"
                 android:layout_toRightOf="@+id/txv_mark"
                 android:paddingLeft="10dp"
@@ -80,7 +80,7 @@
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_below="@+id/txv_store_name"
+                android:layout_below="@+id/txv_dish"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/ic_baseline_add_shopping_cart_24" />
@@ -112,11 +112,13 @@
             android:layout_height="560dp"
             android:layout_below="@+id/info"
             android:layout_marginTop="10dp"
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
-            android:numColumns="2"
             android:horizontalSpacing="10dp"
+            android:nestedScrollingEnabled="true"
+            android:numColumns="2"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:verticalSpacing="10dp"
-            android:nestedScrollingEnabled="true" />
+            android:clickable="true"
+            android:descendantFocusability="beforeDescendants"/>
     </RelativeLayout>
 </ScrollView>

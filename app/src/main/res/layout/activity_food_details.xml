@@ -8,7 +8,7 @@
 
 
     <ImageView
-        android:id="@+id/imv_food_picture"
+        android:id="@+id/imv_detail_foodpic"
         android:layout_width="0dp"
         android:layout_height="160dp"
         android:layout_alignParentLeft="true"
@@ -23,19 +23,20 @@
 
     <ImageView
         android:id="@+id/imv_back"
-        android:layout_width="0dp"
+        android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_alignParentLeft="true"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="305dp"
+        android:onClick="goBack"
         android:src="@drawable/icons8_back_48px"
-        app:layout_constraintEnd_toStartOf="@+id/toggleButton4"
+        app:layout_constraintEnd_toStartOf="@+id/tbn_favorite"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imv_food_picture"
+        app:layout_constraintTop_toTopOf="@+id/imv_detail_foodpic"
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_add_to_cart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="137dp"
@@ -56,7 +57,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4">
+        app:layout_constraintTop_toBottomOf="@+id/txv_choice">
 
     </ListView>
 
@@ -64,7 +65,7 @@
         android:id="@+id/txv_see_review"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txv_store_name"
+        android:layout_below="@+id/txv_dish"
         android:layout_marginEnd="189dp"
         android:layout_toRightOf="@+id/txv_mark"
         android:paddingLeft="10dp"
@@ -80,7 +81,7 @@
         android:id="@+id/food_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txv_store_name"
+        android:layout_below="@+id/txv_dish"
         android:layout_marginTop="52dp"
         android:layout_toRightOf="@+id/txv_mark"
         android:paddingLeft="10dp"
@@ -88,15 +89,15 @@
         android:textColor="#FF5722"
         android:textSize="32dp"
         app:layout_constraintStart_toStartOf="@+id/imv_star"
-        app:layout_constraintTop_toBottomOf="@+id/txv_store_name" />
+        app:layout_constraintTop_toBottomOf="@+id/txv_dish" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/txv_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="76dp"
-        android:text="01"
+        android:text="1"
         android:textColor="#000000"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -104,30 +105,32 @@
         app:layout_constraintTop_toBottomOf="@+id/txv_see_review" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btn_add"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/ic_baseline_add_circle_24"
-        app:layout_constraintBottom_toBottomOf="@+id/textView6"
-        app:layout_constraintStart_toEndOf="@+id/textView6"
-        app:layout_constraintTop_toTopOf="@+id/textView6"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintBottom_toBottomOf="@+id/txv_amount"
+        app:layout_constraintStart_toEndOf="@+id/txv_amount"
+        app:layout_constraintTop_toTopOf="@+id/txv_amount"
+        app:layout_constraintVertical_bias="0.0"
+        android:onClick="addAmount" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btn_remove"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/ic_baseline_remove_circle_outline_24"
-        app:layout_constraintBottom_toBottomOf="@+id/textView6"
-        app:layout_constraintEnd_toStartOf="@+id/textView6"
-        app:layout_constraintTop_toTopOf="@+id/textView6"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintBottom_toBottomOf="@+id/txv_amount"
+        app:layout_constraintEnd_toStartOf="@+id/txv_amount"
+        app:layout_constraintTop_toTopOf="@+id/txv_amount"
+        app:layout_constraintVertical_bias="0.0"
+        android:onClick="removeAmount"/>
 
     <ImageView
         android:id="@+id/imv_star"
-        android:layout_width="0dp"
+        android:layout_width="23dp"
         android:layout_height="23dp"
-        android:layout_below="@+id/txv_store_name"
+        android:layout_below="@+id/txv_dish"
         android:layout_alignParentLeft="true"
         android:layout_marginStart="24dp"
         android:layout_marginTop="59dp"
@@ -137,13 +140,13 @@
         app:layout_constraintBottom_toBottomOf="@+id/food_price"
         app:layout_constraintEnd_toStartOf="@+id/txv_mark"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/txv_store_name" />
+        app:layout_constraintTop_toTopOf="@+id/txv_dish" />
 
     <TextView
         android:id="@+id/txv_mark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txv_store_name"
+        android:layout_below="@+id/txv_dish"
         android:layout_marginEnd="11dp"
         android:layout_toRightOf="@+id/imv_star"
         android:hint="4.5 (30+)"
@@ -155,19 +158,21 @@
         app:layout_constraintTop_toTopOf="@+id/imv_star" />
 
     <TextView
-        android:id="@+id/txv_store_name"
+        android:id="@+id/txv_dish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:hint="店名"
         android:textSize="32dp"
         app:layout_constraintEnd_toStartOf="@+id/txv_mark"
-        app:layout_constraintStart_toStartOf="@+id/txv_mark"
-        app:layout_constraintTop_toBottomOf="@+id/imv_food_picture" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imv_detail_foodpic" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/txv_comment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -177,7 +182,7 @@
         app:layout_constraintTop_toBottomOf="@+id/food_price" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/txv_choice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="430dp"
@@ -191,8 +196,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ToggleButton
-        android:id="@+id/toggleButton4"
-        android:layout_width="0dp"
+        android:id="@+id/tbn_favorite"
+        android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginEnd="27dp"
         android:background="@drawable/favorite_toggle_selcet"
@@ -200,7 +205,7 @@
         android:textOn=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imv_back"
-        app:layout_constraintTop_toTopOf="@+id/imv_food_picture" />
+        app:layout_constraintTop_toTopOf="@+id/imv_detail_foodpic" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
