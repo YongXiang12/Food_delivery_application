@@ -78,4 +78,14 @@ public class FoodDetailsActivity extends AppCompatActivity {
         }
         tvAmount.setText(amountStr);
     }
+
+    public void goReviewActivity(View view) {
+        Intent intent = new Intent(this, ReviewActivity.class);
+        startActivity(intent);
+    }
+
+    public void goCartActivity(View view) {
+        Intent intent = new Intent(this, CartActivity.class);
+        startActivity(intent);
+    }
 }

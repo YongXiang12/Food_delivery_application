@@ -73,6 +73,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_toRightOf="@+id/txv_mark"
                 android:paddingLeft="10dp"
+                android:onClick="goReviewActivity"
                 android:text="@string/txv_label_see_review"
                 android:textColor="#FF5722"
                 android:textSize="16dp" />
@@ -83,6 +84,7 @@
                 android:layout_below="@+id/txv_dish"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
+                android:onClick="goCartActivity"
                 android:src="@drawable/ic_baseline_add_shopping_cart_24" />
 
             <TextView
