@@ -22,7 +22,7 @@
             android:name=".ui.restaurant.CartActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.restaurant.ReviewActivity"
+            android:name=".ui.review.ReviewActivity"
             android:exported="false" />
         <activity
             android:name=".ui.restaurant.FoodDetailsActivity"

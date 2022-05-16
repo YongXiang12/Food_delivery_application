@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import fcu.mp110.food_delivery_app.MainActivity;
 import fcu.mp110.food_delivery_app.R;
+import fcu.mp110.food_delivery_app.ui.review.ReviewActivity;
 
 public class RestaurantMenu extends AppCompatActivity {
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.restaurant.ReviewActivity">
+    tools:context=".ui.review.ReviewActivity">
 
     <TextView
         android:id="@+id/textView5"
@@ -45,6 +45,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imv_review_goback" />
 
     <ListView
+        android:id="@+id/lv_review"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="32dp"
