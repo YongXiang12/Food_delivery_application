@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "850100100170",
+    "firebase_url": "https://fooddeliveryapp-d2126-default-rtdb.firebaseio.com",
+    "project_id": "fooddeliveryapp-d2126",
+    "storage_bucket": "fooddeliveryapp-d2126.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:850100100170:android:f30149c9bc518caee09ab3",
+        "android_client_info": {
+          "package_name": "fcu.mp110.food_delivery_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "850100100170-efukrq32gsgggltvja0c44cl41q1vq4n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApA-CGFNbLIlRiDiOy-Vgd-8I8vOadV2M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "850100100170-efukrq32gsgggltvja0c44cl41q1vq4n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

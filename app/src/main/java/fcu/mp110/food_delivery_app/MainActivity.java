@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
@@ -24,9 +23,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import fcu.mp110.food_delivery_app.databinding.ActivityMainBinding;
-import fcu.mp110.food_delivery_app.ui.order.OrderStatusActivity;
-import fcu.mp110.food_delivery_app.ui.restaurant.CategoriesArrayAdapter;
-import fcu.mp110.food_delivery_app.ui.restaurant.CategoriesItem;
 import fcu.mp110.food_delivery_app.ui.restaurant.RestaurantArrayAdapter;
 import fcu.mp110.food_delivery_app.ui.restaurant.StoreItem;
 import fcu.mp110.food_delivery_app.ui.search.SearchPage;
@@ -95,12 +91,11 @@ public class MainActivity extends AppCompatActivity {
 
         //FeaturedRestaurant 可右滑recyclerview
         initFeaturedRestaurant();
-        initCategories();
+
     }
 
     public void initFeaturedRestaurant() {
         //setOnClickListener();
-
         RecyclerView recyclerViewStore = this.findViewById(R.id.store_recyclerview);
         ArrayList<StoreItem> storeList = new ArrayList<StoreItem>();
         storeList.add(new StoreItem(R.drawable.ic_mcdonald, "5.0", "A", "麥當勞", "hamburger"));
@@ -114,22 +109,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewStore.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
     }
 
-    public void initCategories() {
-        //setOnClickListener();
-
-        RecyclerView recyclerViewCategories = this.findViewById(R.id.recyclerview_categories);
-        ArrayList<CategoriesItem> categoriesItemList = new ArrayList<CategoriesItem>();
-        categoriesItemList.add(new CategoriesItem(R.drawable.pizza,  "Pizza"));
-        categoriesItemList.add(new CategoriesItem(R.drawable.ic_baseline_fastfood_24,  "Fastfood"));
-        categoriesItemList.add(new CategoriesItem(R.drawable.ic_baseline_coffee_24, "Coffee"));
-        categoriesItemList.add(new CategoriesItem(R.drawable.pizza,  "Pizza"));
-        categoriesItemList.add(new CategoriesItem(R.drawable.pizza, "Pizza"));
-        categoriesItemList.add(new CategoriesItem(R.drawable.pizza, "Pizza"));
-        CategoriesArrayAdapter adapter = new CategoriesArrayAdapter(this, categoriesItemList);
-
-        recyclerViewCategories.setAdapter(adapter);
-        recyclerViewCategories.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
