@@ -36,6 +36,7 @@
         android:layout_marginTop="21dp"
         android:layout_marginEnd="43dp"
         android:background="@drawable/search_textfield_shape"
+        android:drawableStart="@drawable/ic_option"
         android:ems="10"
         android:gravity="center"
         android:inputType="textPersonName"
