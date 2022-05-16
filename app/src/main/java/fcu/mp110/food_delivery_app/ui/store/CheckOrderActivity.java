@@ -9,21 +9,17 @@ import android.view.View;
 import fcu.mp110.food_delivery_app.R;
 import fcu.mp110.food_delivery_app.ui.search.SearchResultPage;
 
-public class StoreActivity extends AppCompatActivity {
+public class CheckOrderActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_store);
+        setContentView(R.layout.activity_check_order);
     }
 
-    public void CheckOrder(View view){
-        Intent intent = new Intent(this , CheckOrderActivity.class);
-        startActivity(intent);
+    public void orderDetail(View view){
+        Intent it = new Intent(this, OrderDetailActivity.class);
+        startActivity(it);
     }
-
-
-
-
 
 }

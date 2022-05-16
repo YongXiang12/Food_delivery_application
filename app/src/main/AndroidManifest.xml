@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nav4">
         <activity
+            android:name=".ui.store.OrderDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.store.CheckOrderActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.order.OrderStatusActivity"
             android:exported="false" />
         <activity
@@ -32,7 +38,8 @@
             android:exported="false" />
         <activity
             android:name=".ui.store.StoreActivity"
-            android:exported="false" />
+            android:exported="true" />
+
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="false" />

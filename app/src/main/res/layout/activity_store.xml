@@ -6,4 +6,95 @@
     android:layout_height="match_parent"
     tools:context=".ui.store.StoreActivity">
 
+    <TextView
+        android:id="@+id/Store_name"
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:text="店家名稱"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.012" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="56dp"
+        android:layout_height="41dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.985"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.002"
+        app:srcCompat="@drawable/toolbar_user" />
+
+    <LinearLayout
+        android:layout_width="335dp"
+        android:layout_height="549dp"
+        android:background="@drawable/pink_round_corner"
+        android:gravity="center|top"
+        android:orientation="vertical"
+        android:paddingTop="150px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="279dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20px"
+            android:background="@drawable/while_nostroke_corner"
+            android:onClick="CheckOrder"
+            android:paddingEnd="20px"
+            android:text="查詢訂單"
+            android:textColor="#FFF34D85"
+            android:textSize="23sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20px"
+            android:background="@drawable/while_nostroke_corner"
+            android:text="調整/新增菜單"
+            android:textColor="#FFF34D85"
+            android:textSize="23sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="284dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20px"
+            android:background="@drawable/while_nostroke_corner"
+            android:text="查看自身評價"
+            android:textColor="#FFF34D85"
+            android:textSize="23sp"
+            android:textStyle="bold" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="102dp"
+            android:layout_height="41dp"
+            android:orientation="horizontal" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="284dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20px"
+            android:background="@drawable/while_nostroke_corner"
+            android:text="登出"
+            android:textColor="#FFF34D85"
+            android:textSize="23sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
