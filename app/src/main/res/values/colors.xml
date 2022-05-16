@@ -13,4 +13,8 @@
     <color name="whilte">#14FFFFFF</color>
     <color name="orange">#FF5722</color>
     <color name="orange2">#41FF5722</color>
+    <color name="green">#542BDD17</color>
+    <color name="blue">#4000B8D4</color>
+    <color name="pink">#2CE91E63</color>
+    <color name="per">#319C27B0</color>
 </resources>

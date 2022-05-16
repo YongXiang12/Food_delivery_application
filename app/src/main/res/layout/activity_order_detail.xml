@@ -7,7 +7,7 @@
     tools:context=".ui.store.OrderDetailActivity">
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/txv_categoriesname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="訂單#1"

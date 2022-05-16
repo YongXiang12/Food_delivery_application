@@ -68,7 +68,7 @@
                 android:text="$32" />
 
             <TextView
-                android:id="@+id/textView16"
+                android:id="@+id/txv_categoriesname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView15"
@@ -90,7 +90,7 @@
                 android:id="@+id/textView17"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textView16"
+                android:layout_below="@+id/txv_categoriesname"
                 android:text="Discount"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
