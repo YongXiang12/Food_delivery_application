@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -49,13 +50,26 @@ public class CustomizationAdapter extends ArrayAdapter<DishesCustomizationItem> 
         tvCustomization.setText(item.getCustomization());
         TextView tvAddPrice = itemLayout.findViewById(R.id.txv_add_price);
         tvAddPrice.setText(item.getPrice());
-        RadioButton rbtChoice = itemLayout.findViewById(R.id.rbt_choice);
+        CheckBox rbtChoice = itemLayout.findViewById(R.id.chbt_choice);
         rbtChoice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                // Is the view now checked?
+                boolean checked = ((CheckBox) view).isChecked();
+                // Check which checkbox was clicked
+                if (checked) {
+                    item.setChecked(true);
+                    System.out.print("true");
+                } else {
+                    item.setChecked(false);
+                }
+                dishesItems.set(position, item);
             }
         });
         return itemLayout;
+    }
+
+    public List<DishesCustomizationItem> getDishesItems() {
+        return dishesItems;
     }
 }

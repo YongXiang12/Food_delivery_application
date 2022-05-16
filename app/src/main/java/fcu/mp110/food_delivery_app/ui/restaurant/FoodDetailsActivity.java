@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -11,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import fcu.mp110.food_delivery_app.R;
 
@@ -22,6 +24,7 @@ public class FoodDetailsActivity extends AppCompatActivity {
     private TextView tvPrice;
     private TextView tvComment;
     private ListView lvCustomization;
+    private CustomizationAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +53,7 @@ public class FoodDetailsActivity extends AppCompatActivity {
                 "Baby Spinach", "+$10"));
         customizationList.add(new DishesCustomizationItem(R.drawable.icons8_star_96px,
                 "Mushroom", "+$15"));
-        CustomizationAdapter adapter = new CustomizationAdapter(this,
+        adapter = new CustomizationAdapter(this,
                 R.layout.dishes_customization, customizationList);
         lvCustomization = findViewById(R.id.lv_conditions);
         lvCustomization.setAdapter(adapter);
@@ -86,6 +89,14 @@ public class FoodDetailsActivity extends AppCompatActivity {
 
     public void goCartActivity(View view) {
         Intent intent = new Intent(this, CartActivity.class);
+        List<DishesCustomizationItem> items = adapter.getDishesItems();
+        int count = 0;
+        for(int i=0; i<items.size(); i++) {
+            if (items.get(i).isChecked()) {
+                count = count + 1;
+            }
+        }
+        intent.putExtra("checkbox", count);
         startActivity(intent);
     }
 }

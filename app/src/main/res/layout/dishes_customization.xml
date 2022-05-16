@@ -33,8 +33,8 @@
         android:text="+$10"
         android:textSize="24sp" />
 
-    <RadioButton
-        android:id="@+id/rbt_choice"
+    <CheckBox
+        android:id="@+id/chbt_choice"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_gravity="center_vertical" />

@@ -5,16 +5,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import fcu.mp110.food_delivery_app.R;
 import fcu.mp110.food_delivery_app.ui.order.OrderStatusActivity;
 
 public class CartActivity extends AppCompatActivity {
 
+    private TextView tvDetail;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+        Intent intent = getIntent();
+        int count = intent.getIntExtra("checkbox",0);
+        tvDetail = findViewById(R.id.txv_detail);
+
+
+        tvDetail.setText(Integer.toString(count));
     }
 
     public void goBack(View view) {
