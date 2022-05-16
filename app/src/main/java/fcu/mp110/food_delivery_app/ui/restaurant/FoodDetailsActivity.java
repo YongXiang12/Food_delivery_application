@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -16,6 +17,7 @@ import fcu.mp110.food_delivery_app.ui.review.ReviewActivity;
 
 public class FoodDetailsActivity extends AppCompatActivity {
 
+    private ImageView tvFoodPic;
     private TextView tvAmount;
     private TextView tvDish;
     private TextView tvMark;
@@ -34,6 +36,8 @@ public class FoodDetailsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String name = intent.getStringExtra("dishName");
         tvDish.setText(name);
+        tvFoodPic = findViewById(R.id.imv_detail_foodpic);
+        tvFoodPic.setImageResource(intent.getIntExtra("dishImgResId",0));
         tvMark = findViewById(R.id.txv_mark);
         String mark = intent.getStringExtra("dishMark");
         tvMark.setText(mark);

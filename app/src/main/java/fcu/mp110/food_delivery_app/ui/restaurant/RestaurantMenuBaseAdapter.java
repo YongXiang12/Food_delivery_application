@@ -68,6 +68,7 @@ public class RestaurantMenuBaseAdapter extends BaseAdapter {
                 intent.putExtra("dishName", item.getTvDishName());
                 intent.putExtra("dishPrice", item.getTvPrice());
                 intent.putExtra("dishMark", item.getTvMark());
+                intent.putExtra("dishImgResId", item.getImgResId());
                 context.startActivity(intent);
             }
         });
