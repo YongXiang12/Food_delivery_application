@@ -79,7 +79,7 @@
   <td>張詠翔</td>
   <td>D0975253</td>
   <td>YongXiang12</td>
-  <td>Issues</td>
+  <td>User(Store) -001 , User(Store) -002 ,User(Store) -003 , User(Store) -004</td>
 </tr>
 <tr>
   <td>駱正彧</td>
