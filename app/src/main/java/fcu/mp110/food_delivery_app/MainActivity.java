@@ -23,6 +23,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import fcu.mp110.food_delivery_app.databinding.ActivityMainBinding;
+import fcu.mp110.food_delivery_app.ui.restaurant.CategoriesArrayAdapter;
+import fcu.mp110.food_delivery_app.ui.restaurant.CategoriesItem;
 import fcu.mp110.food_delivery_app.ui.restaurant.RestaurantArrayAdapter;
 import fcu.mp110.food_delivery_app.ui.restaurant.StoreItem;
 import fcu.mp110.food_delivery_app.ui.search.SearchPage;
@@ -91,9 +93,21 @@ public class MainActivity extends AppCompatActivity {
 
         //FeaturedRestaurant 可右滑recyclerview
         initFeaturedRestaurant();
-
+        initCategories();
     }
+    public void initCategories(){
+        RecyclerView recyclerViewCategories = this.findViewById(R.id.recyclerview_categories);
+        ArrayList<CategoriesItem> categoriesList = new ArrayList<CategoriesItem>();
+        categoriesList.add(new CategoriesItem(R.drawable.pizza , "Pizza"));
+        categoriesList.add(new CategoriesItem(R.drawable.ic_baseline_coffee_24 , "Coffee"));
+        categoriesList.add(new CategoriesItem(R.drawable.ic_baseline_fastfood_24 , "Fastfood"));
+        categoriesList.add(new CategoriesItem(R.drawable.pizza , "pizza"));
+        categoriesList.add(new CategoriesItem(R.drawable.pizza , "pizza"));
+        CategoriesArrayAdapter adapter = new CategoriesArrayAdapter(this, categoriesList);
 
+        recyclerViewCategories.setAdapter(adapter);
+        recyclerViewCategories.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+    }
     public void initFeaturedRestaurant() {
         //setOnClickListener();
         RecyclerView recyclerViewStore = this.findViewById(R.id.store_recyclerview);
