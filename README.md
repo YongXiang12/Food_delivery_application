@@ -120,7 +120,7 @@
   <td>駱正彧</td>
   <td>D0852620</td>
   <td>Samel0731</td>
-  <td>User(Order) -012</td>
+  <td>#30, #35,</td>
 </tr>
 <tr>
   <td>張洸瑋</td>
