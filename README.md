@@ -114,7 +114,7 @@
   <td>張詠翔</td>
   <td>D0975253</td>
   <td>YongXiang12</td>
-  <td>#23 , #22</td>
+  <td>#23 , #22 , #35</td>
 </tr>
 <tr>
   <td>駱正彧</td>
