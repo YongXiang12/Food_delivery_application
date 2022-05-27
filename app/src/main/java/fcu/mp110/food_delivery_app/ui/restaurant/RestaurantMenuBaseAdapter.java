@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 import fcu.mp110.food_delivery_app.R;
@@ -50,25 +52,28 @@ public class RestaurantMenuBaseAdapter extends BaseAdapter {
         RestaurantMenuGridItem item = gridItems.get(i);
         // set info
         ImageView imageView = view.findViewById(R.id.imv_thumbnail);
-        imageView.setImageResource(item.getImgResId());
+        Glide.with(context)
+                .load(item.getMenuImgURI())
+                .into(imageView);
+
         TextView tvPrice = view.findViewById(R.id.txv_dish_price);
-        tvPrice.setText(item.getTvPrice());
-        TextView tvMark = view.findViewById(R.id.txv_dish_review);
-        tvMark.setText(item.getTvMark());
+        tvPrice.setText(item.getPrice());
+//        TextView tvMark = view.findViewById(R.id.txv_dish_review);
+//        tvMark.setText(item.getTvMark());
         TextView tvDishName = view.findViewById(R.id.txv_dish_name);
-        tvDishName.setText(item.getTvDishName());
-        TextView tvIngredient = view.findViewById(R.id.txv_dish_ingredients);
-        tvIngredient.setText(item.getTvIngredient());
+        tvDishName.setText(item.getDishName());
+//        TextView tvIngredient = view.findViewById(R.id.txv_dish_ingredients);
+//        tvIngredient.setText(item.getTvIngredient());
         // set setOnClickListener
         CardView cardView = view.findViewById(R.id.cardview_food);
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, FoodDetailsActivity.class);
-                intent.putExtra("dishName", item.getTvDishName());
-                intent.putExtra("dishPrice", item.getTvPrice());
-                intent.putExtra("dishMark", item.getTvMark());
-                intent.putExtra("dishImgResId", item.getImgResId());
+                intent.putExtra("dishName", item.getDishName());
+                intent.putExtra("dishPrice", item.getPrice());
+//                intent.putExtra("dishMark", item.getTvMark());
+                intent.putExtra("dishImgURI", item.getMenuImgURI());
                 context.startActivity(intent);
             }
         });

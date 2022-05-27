@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +39,10 @@ public class FoodDetailsActivity extends AppCompatActivity {
         String name = intent.getStringExtra("dishName");
         tvDish.setText(name);
         tvFoodPic = findViewById(R.id.imv_detail_foodpic);
-        tvFoodPic.setImageResource(intent.getIntExtra("dishImgResId",0));
+        String imgURI = intent.getStringExtra("dishImgURI");
+        Glide.with(this)
+                .load(imgURI)
+                .into(tvFoodPic);
         tvMark = findViewById(R.id.txv_mark);
         String mark = intent.getStringExtra("dishMark");
         tvMark.setText(mark);

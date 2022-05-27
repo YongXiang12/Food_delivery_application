@@ -4,61 +4,85 @@ import android.widget.TextView;
 
 public class RestaurantMenuGridItem {
 
-    private int imgResId;
-    private String tvPrice;
+    private String menuImgURI;
+    private String key;
+    private String price;
     private String tvMark;
-    private String tvDishName;
+    private String dishName;
     private String tvIngredient;
 
-    public RestaurantMenuGridItem(int imgResId, String tvPrice, String tvMark, String tvDishName,
-                                  String tvIngredient) {
-        this.imgResId = imgResId;
-        this.tvPrice = tvPrice;
-        this.tvMark = tvMark;
-        this.tvDishName = tvDishName;
-        this.tvIngredient = tvIngredient;
+    public RestaurantMenuGridItem() {
+
     }
 
-
-    public int getImgResId() {
-        return imgResId;
+    public void setKey(String key) {
+        this.key = key;
     }
 
-    public void setImgResId(int imgResId) {
-        this.imgResId = imgResId;
+    public String getMenuImgURI() {
+        return menuImgURI;
     }
 
-    public String getTvPrice() {
-        return tvPrice;
+    public String getKey() {
+        return key;
     }
 
-    public void setTvPrice(String tvPrice) {
-        this.tvPrice = tvPrice;
+    public String getPrice() {
+        return price;
     }
 
-    public String getTvMark() {
-        return tvMark;
+    public String getDishName() {
+        return dishName;
     }
+    //    public RestaurantMenuGridItem(int imgResId, String tvPrice, String tvMark, String tvDishName,
+//                                  String tvIngredient) {
+//        this.imgResId = imgResId;
+//        this.tvPrice = tvPrice;
+//        this.tvMark = tvMark;
+//        this.tvDishName = tvDishName;
+//        this.tvIngredient = tvIngredient;
+//    }
 
-    public void setTvMark(String tvMark) {
-        this.tvMark = tvMark;
-    }
 
-    public String getTvDishName() {
-        return tvDishName;
-    }
-
-    public void setTvDishName(String tvDishName) {
-        this.tvDishName = tvDishName;
-    }
-
-    public String getTvIngredient() {
-        return tvIngredient;
-    }
-
-    public void setTvIngredient(String tvIngredient) {
-        this.tvIngredient = tvIngredient;
-    }
-
+//    public int getImgResId() {
+//        return imgResId;
+//    }
+//
+//    public void setImgResId(int imgResId) {
+//        this.imgResId = imgResId;
+//    }
+//
+//    public String getTvPrice() {
+//        return tvPrice;
+//    }
+//
+//    public void setTvPrice(String tvPrice) {
+//        this.tvPrice = tvPrice;
+//    }
+//
+//    public String getTvMark() {
+//        return tvMark;
+//    }
+//
+//    public void setTvMark(String tvMark) {
+//        this.tvMark = tvMark;
+//    }
+//
+//    public String getTvDishName() {
+//        return tvDishName;
+//    }
+//
+//    public void setTvDishName(String tvDishName) {
+//        this.tvDishName = tvDishName;
+//    }
+//
+//    public String getTvIngredient() {
+//        return tvIngredient;
+//    }
+//
+//    public void setTvIngredient(String tvIngredient) {
+//        this.tvIngredient = tvIngredient;
+//    }
+//
 
 }

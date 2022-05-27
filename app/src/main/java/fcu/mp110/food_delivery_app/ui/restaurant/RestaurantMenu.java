@@ -1,33 +1,31 @@
 package fcu.mp110.food_delivery_app.ui.restaurant;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import fcu.mp110.food_delivery_app.R;
 import fcu.mp110.food_delivery_app.ui.review.ReviewActivity;
 
 public class RestaurantMenu extends AppCompatActivity {
-
-    int[] itemsarray = new int[]{
-            R.drawable.seafood_pizza,R.drawable.ic_mcdonald,
-            R.drawable.seafood_pizza,R.drawable.ic_mcdonald,
-            R.drawable.seafood_pizza,R.drawable.ic_mcdonald,
-            R.drawable.seafood_pizza,R.drawable.ic_mcdonald,
-            R.drawable.seafood_pizza,R.drawable.ic_mcdonald,
-            R.drawable.seafood_pizza,R.drawable.ic_mcdonald,
-            R.drawable.seafood_pizza,R.drawable.ic_mcdonald,
-            R.drawable.seafood_pizza,R.drawable.ic_mcdonald,
-            R.drawable.seafood_pizza,R.drawable.ic_mcdonald
-    };
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,34 +34,58 @@ public class RestaurantMenu extends AppCompatActivity {
 
         Intent intent = getIntent();
         // get and set thumbnail picture
-        int picresid = intent.getIntExtra("storepicture",0);
+        String imgURI = intent.getStringExtra("restaurantImgURI");
         ImageView thumbnail = findViewById(R.id.imv_thumbnail);
-        thumbnail.setImageResource(picresid);
+        Glide.with(this)
+                .load(imgURI)
+                .into(thumbnail);
         // get and set store name
-        String storeName = intent.getStringExtra("storename");
-        TextView txvStoreName = findViewById(R.id.txv_dish);
-        txvStoreName.setText(storeName);
+        String restaurantName = intent.getStringExtra("restaurantName");
+        TextView txvRestaurantName = findViewById(R.id.txv_dish);
+        txvRestaurantName.setText(restaurantName);
+
+        String restaurantScore = intent.getStringExtra("restaurantScore");
+        String restaurantCommentNum = intent.getStringExtra("restaurantCommentNum");
+        //Log.v("MyApp", (restaurantScore+restaurantCommentNum));
+        TextView txv_mark = (TextView) findViewById(R.id.txv_mark);
+        txv_mark.setText(restaurantScore+restaurantCommentNum);
 
         ArrayList<RestaurantMenuGridItem> menuGridItems = new ArrayList<RestaurantMenuGridItem>();
-        menuGridItems.add(new RestaurantMenuGridItem(R.drawable.seafood_pizza, "$100",
-                "4.5 (30+)", "Pizza", "Chicken Cheese"));
-        menuGridItems.add(new RestaurantMenuGridItem(R.drawable.ic_mcdonald, "$85",
-                "4.5 (30+)", "Fries", "fires"));
-        menuGridItems.add(new RestaurantMenuGridItem(R.drawable.seafood_pizza, "$90",
-                "4.5 (30+)", "Pizza", "Chicken Cheese"));
-        menuGridItems.add(new RestaurantMenuGridItem(R.drawable.seafood_pizza, "$100",
-                "4.5 (30+)", "hamburger", "Chicken Cheese"));
 
         // create a object of myBaseAdapter
+        String restaurantKey = intent.getStringExtra("restaurantKey");
         RestaurantMenuBaseAdapter baseAdapter = new RestaurantMenuBaseAdapter(this, menuGridItems);
         GridView gridView = findViewById(R.id.menu);
         gridView.setAdapter(baseAdapter);
+        DatabaseReference menuRef;
+        menuRef = FirebaseDatabase.getInstance()
+                .getReference("Menu")
+                .child(restaurantKey);
+        menuRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for(DataSnapshot dataSnapshot:snapshot.getChildren()){
+                        RestaurantMenuGridItem menuItem = dataSnapshot.getValue(RestaurantMenuGridItem.class);
+                        menuItem.setKey(dataSnapshot.getKey());
+                        //Log.v("MyApp", (menuItem.getMenuImgURI()));
+                        menuGridItems.add(menuItem);
+
+                    }
+                    baseAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+        });
     }
 
     public void goBack(View view)
     {
-//        Intent intent = new Intent(this, MainActivity.class);
-//        startActivity(intent);
         finish();
     }
 
@@ -77,3 +99,22 @@ public class RestaurantMenu extends AppCompatActivity {
         startActivity(intent);
     }
 }
+//    int[] itemsarray = new int[]{
+//            R.drawable.seafood_pizza,R.drawable.ic_mcdonald,
+//            R.drawable.seafood_pizza,R.drawable.ic_mcdonald,
+//            R.drawable.seafood_pizza,R.drawable.ic_mcdonald,
+//            R.drawable.seafood_pizza,R.drawable.ic_mcdonald,
+//            R.drawable.seafood_pizza,R.drawable.ic_mcdonald,
+//            R.drawable.seafood_pizza,R.drawable.ic_mcdonald,
+//            R.drawable.seafood_pizza,R.drawable.ic_mcdonald,
+//            R.drawable.seafood_pizza,R.drawable.ic_mcdonald,
+//            R.drawable.seafood_pizza,R.drawable.ic_mcdonald
+//    };
+//        menuGridItems.add(new RestaurantMenuGridItem(R.drawable.seafood_pizza, "$100",
+//                "4.5 (30+)", "Pizza", "Chicken Cheese"));
+//        menuGridItems.add(new RestaurantMenuGridItem(R.drawable.ic_mcdonald, "$85",
+//                "4.5 (30+)", "Fries", "fires"));
+//        menuGridItems.add(new RestaurantMenuGridItem(R.drawable.seafood_pizza, "$90",
+//                "4.5 (30+)", "Pizza", "Chicken Cheese"));
+//        menuGridItems.add(new RestaurantMenuGridItem(R.drawable.seafood_pizza, "$100",
+//                "4.5 (30+)", "hamburger", "Chicken Cheese"));

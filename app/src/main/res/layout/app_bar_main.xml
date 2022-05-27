@@ -47,7 +47,7 @@
                 android:layout_gravity="right"
                 android:layout_marginRight="10dp"
                 android:contentDescription="@string/nav_header_desc"
-                app:srcCompat="@drawable/toolbar_user" />
+                app:srcCompat="@drawable/ic_baseline_favorite_border_30" />
         </androidx.appcompat.widget.Toolbar>
 
         <LinearLayout

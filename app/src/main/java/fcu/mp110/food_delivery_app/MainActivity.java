@@ -2,14 +2,20 @@ package fcu.mp110.food_delivery_app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -26,9 +32,8 @@ import fcu.mp110.food_delivery_app.databinding.ActivityMainBinding;
 import fcu.mp110.food_delivery_app.ui.restaurant.CategoriesArrayAdapter;
 import fcu.mp110.food_delivery_app.ui.restaurant.CategoriesItem;
 import fcu.mp110.food_delivery_app.ui.restaurant.RestaurantArrayAdapter;
-import fcu.mp110.food_delivery_app.ui.restaurant.StoreItem;
+import fcu.mp110.food_delivery_app.ui.restaurant.RestaurantItem;
 import fcu.mp110.food_delivery_app.ui.search.SearchPage;
-import fcu.mp110.food_delivery_app.ui.store.StoreActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -111,16 +116,42 @@ public class MainActivity extends AppCompatActivity {
     public void initFeaturedRestaurant() {
         //setOnClickListener();
         RecyclerView recyclerViewStore = this.findViewById(R.id.store_recyclerview);
-        ArrayList<StoreItem> storeList = new ArrayList<StoreItem>();
-        storeList.add(new StoreItem(R.drawable.ic_mcdonald, "5.0", "A", "麥當勞", "hamburger"));
-        storeList.add(new StoreItem(R.drawable.hawwaipizza, "5.0", "B", "達美樂", "pizza"));
-        storeList.add(new StoreItem(R.drawable.seafood_pizza, "5.0", "B", "BB", "hamburger"));
-        storeList.add(new StoreItem(R.drawable.seafood_pizza, "5.0", "B", "BB", "hamburger"));
-        storeList.add(new StoreItem(R.drawable.seafood_pizza, "5.0", "B", "BB", "hamburger"));
-        RestaurantArrayAdapter adapter = new RestaurantArrayAdapter(this, storeList);
-
+        ArrayList<RestaurantItem> restaurantList = new ArrayList<RestaurantItem>();
+        RestaurantArrayAdapter adapter = new RestaurantArrayAdapter(MainActivity.this, restaurantList);
         recyclerViewStore.setAdapter(adapter);
         recyclerViewStore.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+        DatabaseReference restaurantRef;
+        restaurantRef = FirebaseDatabase.getInstance()
+                .getReference("Restaurant");
+        restaurantRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for(DataSnapshot dataSnapshot:snapshot.getChildren()){
+                        RestaurantItem restaurantItem = dataSnapshot.getValue(RestaurantItem.class);
+                        restaurantItem.setKey(dataSnapshot.getKey());
+                        
+                        restaurantList.add(restaurantItem);
+
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+        });
+//        RecyclerView recyclerViewStore = this.findViewById(R.id.store_recyclerview);
+//        ArrayList<StoreItem> storeList = new ArrayList<StoreItem>();
+//        storeList.add(new StoreItem(R.drawable.ic_mcdonald, "5.0", "A", "麥當勞", "hamburger"));
+//        storeList.add(new StoreItem(R.drawable.hawwaipizza, "5.0", "B", "達美樂", "pizza"));
+//        storeList.add(new StoreItem(R.drawable.seafood_pizza, "5.0", "B", "BB", "hamburger"));
+//        storeList.add(new StoreItem(R.drawable.seafood_pizza, "5.0", "B", "BB", "hamburger"));
+//        storeList.add(new StoreItem(R.drawable.seafood_pizza, "5.0", "B", "BB", "hamburger"));
+
     }
 
 

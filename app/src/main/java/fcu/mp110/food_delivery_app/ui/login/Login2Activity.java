@@ -56,6 +56,8 @@ public class Login2Activity extends AppCompatActivity implements OnCompleteListe
             addUser();
         } else {
             Toast.makeText(this,"Fail", Toast.LENGTH_LONG).show();
+            task.getException();
+            Log.w("Login2Activity", "createUserWithEmail:failure", task.getException());
         }
     }
 
