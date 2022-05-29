@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.restaurant.CartActivity">
+    tools:context=".ui.cart.CartActivity">
 
     <ImageView
         android:id="@+id/imv_cart_back"
@@ -63,9 +63,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
+                android:text="$32"
                 android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                android:text="$32" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/txv_categoriesname"
@@ -80,11 +80,11 @@
                 android:id="@+id/txv_delivery_charge_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
                 android:layout_below="@+id/txv_subtotal_price"
+                android:layout_alignParentEnd="true"
+                android:text="$5"
                 android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                android:text="$5" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/textView17"
@@ -99,11 +99,11 @@
                 android:id="@+id/txv_discount_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
                 android:layout_below="@+id/txv_delivery_charge_price"
+                android:layout_alignParentEnd="true"
+                android:text="$10"
                 android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                android:text="$10" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/txv_detail"
@@ -118,11 +118,11 @@
                 android:id="@+id/txv_total_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
                 android:layout_below="@+id/txv_discount_price"
+                android:layout_alignParentEnd="true"
+                android:text="$27"
                 android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                android:text="$27" />
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/button5"
@@ -137,7 +137,7 @@
 
     </androidx.cardview.widget.CardView>
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/lv_oders"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -145,6 +145,9 @@
         android:layout_marginTop="21dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="19dp"
+        android:clipToPadding="false"
+        android:orientation="horizontal"
+        android:overScrollMode="never"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

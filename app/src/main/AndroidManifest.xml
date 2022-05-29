@@ -20,7 +20,7 @@
             android:name=".ui.order.OrderStatusActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.restaurant.CartActivity"
+            android:name=".ui.cart.CartActivity"
             android:exported="false" />
         <activity
             android:name=".ui.review.ReviewActivity"

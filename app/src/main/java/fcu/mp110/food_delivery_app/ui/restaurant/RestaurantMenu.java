@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -19,10 +18,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import fcu.mp110.food_delivery_app.R;
+import fcu.mp110.food_delivery_app.ui.cart.CartActivity;
 import fcu.mp110.food_delivery_app.ui.review.ReviewActivity;
 
 public class RestaurantMenu extends AppCompatActivity {

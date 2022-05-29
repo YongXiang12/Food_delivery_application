@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fcu.mp110.food_delivery_app.R;
+import fcu.mp110.food_delivery_app.ui.cart.CartActivity;
 import fcu.mp110.food_delivery_app.ui.review.ReviewActivity;
 
 public class FoodDetailsActivity extends AppCompatActivity {
