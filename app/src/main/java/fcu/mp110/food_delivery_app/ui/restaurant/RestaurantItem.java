@@ -1,5 +1,6 @@
 package fcu.mp110.food_delivery_app.ui.restaurant;
 
+
 public class RestaurantItem {
     private String key;
     private String restaurantImgURI;
@@ -7,8 +8,13 @@ public class RestaurantItem {
     private String restaurantLabel;
     private String restaurantScore;
     private String restaurantCommentNum;
+    private String deliveryTime;
     public RestaurantItem() {
 
+    }
+
+    public String getDeliveryTime() {
+        return deliveryTime;
     }
 
     public String getRestaurantCommentNum() {

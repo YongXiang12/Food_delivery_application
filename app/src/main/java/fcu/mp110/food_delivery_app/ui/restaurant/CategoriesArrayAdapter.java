@@ -47,6 +47,9 @@ public class CategoriesArrayAdapter extends RecyclerView.Adapter<CategoriesArray
         @Override
         public void onClick(View view) {
             int pos = getAdapterPosition();
+            Intent intent = new Intent(context, CategoriesResultActivity.class);
+            intent.putExtra("categoriesLabel", categoriesName.getText().toString());
+            context.startActivity(intent);
 //            Intent intent = new Intent(context, RestaurantMenu.class);
 //            intent.putExtra("storename", storeItemList.get(pos).getStoreName());
 //            intent.putExtra("storepicture", storeItemList.get(pos).getStoreImgResId());

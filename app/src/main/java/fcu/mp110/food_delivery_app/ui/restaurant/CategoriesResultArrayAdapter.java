@@ -17,17 +17,16 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
 
-import fcu.mp110.food_delivery_app.MainActivity;
 import fcu.mp110.food_delivery_app.R;
 
-public class RestaurantArrayAdapter extends RecyclerView.Adapter<RestaurantArrayAdapter.ViewHolder> {
-    public List<RestaurantItem> restaurantItemList;
+public class CategoriesResultArrayAdapter extends RecyclerView.Adapter<CategoriesResultArrayAdapter.ViewHolder> {
+    public List<RestaurantItem> categoriesResultItemList;
     public Context context;
 
 
-    public RestaurantArrayAdapter(MainActivity context, ArrayList<RestaurantItem> restaurantItems) {
+    public CategoriesResultArrayAdapter(CategoriesResultActivity context, ArrayList<RestaurantItem> categoriesResultItems) {
         this.context = context;
-        this.restaurantItemList = restaurantItems;
+        this.categoriesResultItemList = categoriesResultItems;
     }
 
 
@@ -57,12 +56,12 @@ public class RestaurantArrayAdapter extends RecyclerView.Adapter<RestaurantArray
         public void onClick(View view) {
             int pos = getAdapterPosition();
             Intent intent = new Intent(context, RestaurantMenu.class);
-            intent.putExtra("deliveryTime",  restaurantItemList.get(pos).getDeliveryTime());
-            intent.putExtra("restaurantKey", restaurantItemList.get(pos).getKey());
-            intent.putExtra("restaurantName", restaurantItemList.get(pos).getRestaurantName());
-            intent.putExtra("restaurantImgURI", restaurantItemList.get(pos).getRestaurantImgURI());
-            intent.putExtra("restaurantScore", restaurantItemList.get(pos).getRestaurantScore());
-            intent.putExtra("restaurantCommentNum", restaurantItemList.get(pos).getRestaurantCommentNum());
+            intent.putExtra("deliveryTime",  categoriesResultItemList.get(pos).getDeliveryTime());
+            intent.putExtra("restaurantKey", categoriesResultItemList.get(pos).getKey());
+            intent.putExtra("restaurantName", categoriesResultItemList.get(pos).getRestaurantName());
+            intent.putExtra("restaurantImgURI", categoriesResultItemList.get(pos).getRestaurantImgURI());
+            intent.putExtra("restaurantScore", categoriesResultItemList.get(pos).getRestaurantScore());
+            intent.putExtra("restaurantCommentNum", categoriesResultItemList.get(pos).getRestaurantCommentNum());
             context.startActivity(intent);
         }
     }
@@ -71,7 +70,7 @@ public class RestaurantArrayAdapter extends RecyclerView.Adapter<RestaurantArray
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View contactView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.restaurantlistitem, parent, false);
+                .inflate(R.layout.categoriesresultitem, parent, false);
 
         // Return a new holder instance
         ViewHolder viewHolder = new ViewHolder(contactView);
@@ -82,7 +81,7 @@ public class RestaurantArrayAdapter extends RecyclerView.Adapter<RestaurantArray
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 // Get the Subject based on the current position
-        RestaurantItem item = restaurantItemList.get(position);
+        RestaurantItem item = categoriesResultItemList.get(position);
 
         // Setting views with the corresponding data
         ImageView imageView = holder.restaurantImg;
@@ -105,8 +104,8 @@ public class RestaurantArrayAdapter extends RecyclerView.Adapter<RestaurantArray
 
     @Override
     public int getItemCount() {
-        return restaurantItemList.size();
+        return categoriesResultItemList.size();
     }
-
-
 }
+
+

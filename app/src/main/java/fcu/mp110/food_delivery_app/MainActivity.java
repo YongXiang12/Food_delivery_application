@@ -2,7 +2,6 @@ package fcu.mp110.food_delivery_app;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.widget.TextView;
@@ -29,9 +28,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import fcu.mp110.food_delivery_app.databinding.ActivityMainBinding;
+import fcu.mp110.food_delivery_app.ui.restaurant.CartActivity;
 import fcu.mp110.food_delivery_app.ui.restaurant.CategoriesArrayAdapter;
 import fcu.mp110.food_delivery_app.ui.restaurant.CategoriesItem;
 import fcu.mp110.food_delivery_app.ui.restaurant.RestaurantArrayAdapter;
+
 import fcu.mp110.food_delivery_app.ui.restaurant.RestaurantItem;
 import fcu.mp110.food_delivery_app.ui.search.SearchPage;
 
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
-
+    private ArrayList<RestaurantItem> restaurantList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,13 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        binding.appBarMain.shoppingcart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CartActivity.class);
+                startActivity(intent);
+            }
+        });
         /*ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, tb, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -104,8 +112,8 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerViewCategories = this.findViewById(R.id.recyclerview_categories);
         ArrayList<CategoriesItem> categoriesList = new ArrayList<CategoriesItem>();
         categoriesList.add(new CategoriesItem(R.drawable.pizza , "Pizza"));
-        categoriesList.add(new CategoriesItem(R.drawable.ic_baseline_coffee_24 , "Coffee"));
-        categoriesList.add(new CategoriesItem(R.drawable.ic_baseline_fastfood_24 , "Fastfood"));
+        categoriesList.add(new CategoriesItem(R.drawable.coffee , "Coffee"));
+        categoriesList.add(new CategoriesItem(R.drawable.burger , "Fastfood"));
         categoriesList.add(new CategoriesItem(R.drawable.pizza , "pizza"));
         categoriesList.add(new CategoriesItem(R.drawable.pizza , "pizza"));
         CategoriesArrayAdapter adapter = new CategoriesArrayAdapter(this, categoriesList);
@@ -116,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
     public void initFeaturedRestaurant() {
         //setOnClickListener();
         RecyclerView recyclerViewStore = this.findViewById(R.id.store_recyclerview);
-        ArrayList<RestaurantItem> restaurantList = new ArrayList<RestaurantItem>();
+        restaurantList = new ArrayList<RestaurantItem>();
         RestaurantArrayAdapter adapter = new RestaurantArrayAdapter(MainActivity.this, restaurantList);
         recyclerViewStore.setAdapter(adapter);
         recyclerViewStore.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
@@ -130,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
                     for(DataSnapshot dataSnapshot:snapshot.getChildren()){
                         RestaurantItem restaurantItem = dataSnapshot.getValue(RestaurantItem.class);
                         restaurantItem.setKey(dataSnapshot.getKey());
-                        
+                        restaurantItem.getRestaurantLabel();
                         restaurantList.add(restaurantItem);
 
                     }
