@@ -108,7 +108,7 @@
   <td>徐品鈞</td>
   <td>D0852825</td>
   <td>maxchenzzz</td>
-  <td>#37</td>
+  <td>#37 #41</td>
 </tr>
 <tr>
   <td>張詠翔</td>
