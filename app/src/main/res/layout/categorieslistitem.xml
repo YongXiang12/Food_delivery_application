@@ -12,7 +12,9 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="4dp"
         android:layout_marginRight="8dp"
-        app:cardBackgroundColor="@color/orange"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardBackgroundColor="@color/orange2"
         app:cardCornerRadius="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

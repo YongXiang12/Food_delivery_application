@@ -44,6 +44,10 @@ public class RestaurantMenu extends AppCompatActivity {
         TextView txvRestaurantName = findViewById(R.id.txv_dish);
         txvRestaurantName.setText(restaurantName);
 
+        String deliveryTime = intent.getStringExtra("deliveryTime");
+        TextView txvdeliveryTime = findViewById(R.id.txv_delivery_time);
+        txvdeliveryTime.setText("外送" + deliveryTime + "分鐘");
+
         String restaurantScore = intent.getStringExtra("restaurantScore");
         String restaurantCommentNum = intent.getStringExtra("restaurantCommentNum");
         //Log.v("MyApp", (restaurantScore+restaurantCommentNum));

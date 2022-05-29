@@ -22,6 +22,7 @@
                 android:id="@+id/imv_back"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
+                android:scaleType="fitXY"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="30dp"
