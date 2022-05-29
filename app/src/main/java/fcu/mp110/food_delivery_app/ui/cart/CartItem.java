@@ -1,12 +1,21 @@
 package fcu.mp110.food_delivery_app.ui.cart;
 
 public class CartItem {
+    private String key;
     private String name;
     private String category;
-    private String price;
+    private int price;
     private String image;
 
     public CartItem() {
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getName() {
@@ -25,11 +34,11 @@ public class CartItem {
         this.category = category;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

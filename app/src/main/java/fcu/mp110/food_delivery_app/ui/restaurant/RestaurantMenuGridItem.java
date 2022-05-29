@@ -7,9 +7,9 @@ public class RestaurantMenuGridItem {
     private String menuImgURI;
     private String key;
     private String price;
-    private String tvMark;
+    private String mark;
     private String dishName;
-    private String tvIngredient;
+    private String ingredient;
 
     public RestaurantMenuGridItem() {
 

@@ -1,5 +1,6 @@
 package fcu.mp110.food_delivery_app.ui.cart;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,6 +12,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -21,9 +28,11 @@ import fcu.mp110.food_delivery_app.R;
 import fcu.mp110.food_delivery_app.SwipeControllerActions;
 import fcu.mp110.food_delivery_app.ui.order.OrderStatusActivity;
 
-public class CartActivity extends AppCompatActivity {
+public class CartActivity extends AppCompatActivity implements IDrinkLoadListener{
 
+    IDrinkLoadListener cartItemLoadListener;
     private  CartItemsDataAdapter mAdapter;
+    private DatabaseReference mDatabase;
     private TextView tvDetail;
 
     @Override
@@ -31,12 +40,13 @@ public class CartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         Intent intent = getIntent();
-        int count = intent.getIntExtra("checkbox", 0);
-        tvDetail = findViewById(R.id.txv_detail);
-        tvDetail.setText(Integer.toString(count));
+//        int count = intent.getIntExtra("checkbox", 0);
+//        tvDetail = findViewById(R.id.txv_detail);
+//        tvDetail.setText(Integer.toString(count));
 
-        setPlayersDataAdapter();
-        setupRecyclerView();
+//        setPlayersDataAdapter();
+        loadDrinkFromFirebase();
+//        setupRecyclerView();
     }
 
     private void setPlayersDataAdapter() {
@@ -52,7 +62,7 @@ public class CartActivity extends AppCompatActivity {
                 st = line.split(",");
                 CartItem item = new CartItem();
                 item.setName(st[0]);
-                item.setPrice(st[1]);
+//                item.setPrice(st[1]);
                 item.setCategory(st[4]);
                 item.setImage("https://www.highlandscoffee.com.vn/vnt_upload/product/04_2020/TRATHACHVAI_1.png");
                 cartItems.add(item);
@@ -62,6 +72,61 @@ public class CartActivity extends AppCompatActivity {
         }
 
         mAdapter = new CartItemsDataAdapter(cartItems);
+    }
+
+    private void loadDrinkFromFirebase() {
+        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.lv_oders);
+        List<CartItem> cartItems = new ArrayList<>();
+        mAdapter = new CartItemsDataAdapter(cartItems);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        recyclerView.setAdapter(mAdapter);
+        FirebaseDatabase.getInstance()
+                .getReference("Cart")
+                .child("UNIQUE_USER_ID")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists())
+                        {
+                            for(DataSnapshot orderSnapshot: snapshot.getChildren())
+                            {
+                                CartItem item = orderSnapshot.getValue(CartItem.class);
+                                item.setKey(orderSnapshot.getKey());
+                                cartItems.add(item);
+                            }
+                            mAdapter.notifyDataSetChanged();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        cartItemLoadListener.onDrinkLoadFailed(error.getMessage());
+                    }
+                });
+        SwipeController swipeController = new SwipeController(new SwipeControllerActions() {
+            @Override
+            public void onRightClicked(int position) {
+                mAdapter.cartItems.remove(position);
+                mAdapter.notifyItemRemoved(position);
+                mAdapter.notifyItemRangeChanged(position, mAdapter.getItemCount());
+            }
+
+            @Override
+            public void onLeftClicked(int position) {
+                mAdapter.cartItems.get(position).setName("TEST");
+                mAdapter.notifyItemRangeChanged(position, mAdapter.getItemCount());
+            }
+        });
+
+        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
+        itemTouchhelper.attachToRecyclerView(recyclerView);
+
+        recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+                swipeController.onDraw(c);
+            }
+        });
     }
 
     private void setupRecyclerView() {
@@ -108,5 +173,18 @@ public class CartActivity extends AppCompatActivity {
     }
 
     public void removeAmount(View view) {
+    }
+
+    @Override
+    public void onDrinkLoadSuccess(List<CartItem> cartItemList) {
+        TextView t = this.findViewById(R.id.textView7);
+        t.setText(cartItemList.get(0).getName());
+        mAdapter = new CartItemsDataAdapter(cartItemList);
+//        setupRecyclerView();
+    }
+
+    @Override
+    public void onDrinkLoadFailed(String message) {
+
     }
 }

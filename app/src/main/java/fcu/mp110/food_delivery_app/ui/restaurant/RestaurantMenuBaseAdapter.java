@@ -63,7 +63,7 @@ public class RestaurantMenuBaseAdapter extends BaseAdapter {
         TextView tvDishName = view.findViewById(R.id.txv_dish_name);
         tvDishName.setText(item.getDishName());
 //        TextView tvIngredient = view.findViewById(R.id.txv_dish_ingredients);
-//        tvIngredient.setText(item.getTvIngredient());
+//        tvIngredient.setText(item.getIngredient());
         // set setOnClickListener
         CardView cardView = view.findViewById(R.id.cardview_food);
         cardView.setOnClickListener(new View.OnClickListener() {

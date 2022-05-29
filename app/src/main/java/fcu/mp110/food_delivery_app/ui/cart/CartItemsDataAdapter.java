@@ -56,7 +56,7 @@ public class CartItemsDataAdapter
         CartItem item = cartItems.get(position);
         holder.name.setText(item.getName());
         holder.category.setText(item.getCategory());
-        holder.price.setText("$"+item.getPrice());
+        holder.price.setText("$"+String.valueOf(item.getPrice()));
         Glide.with(holder.context).load(item.getImage())
                 .into(holder.image);
     }
