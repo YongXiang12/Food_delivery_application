@@ -2,10 +2,20 @@ package fcu.mp110.food_delivery_app;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Menu;
+import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
@@ -14,25 +24,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 
 import fcu.mp110.food_delivery_app.databinding.ActivityMainBinding;
-import fcu.mp110.food_delivery_app.ui.restaurant.CartActivity;
+
+import fcu.mp110.food_delivery_app.ui.cart.CartActivity;
 import fcu.mp110.food_delivery_app.ui.restaurant.CategoriesArrayAdapter;
 import fcu.mp110.food_delivery_app.ui.restaurant.CategoriesItem;
 import fcu.mp110.food_delivery_app.ui.restaurant.RestaurantArrayAdapter;
-
 import fcu.mp110.food_delivery_app.ui.restaurant.RestaurantItem;
 import fcu.mp110.food_delivery_app.ui.search.SearchPage;
 
