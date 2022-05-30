@@ -42,6 +42,7 @@ import fcu.mp110.food_delivery_app.ui.review.ReviewActivity;
 public class FoodDetailsActivity extends AppCompatActivity {
 
     private ImageView tvFoodPic;
+    private String imgURL;
     private TextView tvAmount;
     private TextView tvDish;
     private TextView tvMark;
@@ -61,9 +62,9 @@ public class FoodDetailsActivity extends AppCompatActivity {
         String name = intent.getStringExtra("dishName");
         tvDish.setText(name);
         tvFoodPic = findViewById(R.id.imv_detail_foodpic);
-        String imgURI = intent.getStringExtra("dishImgURI");
+        imgURL = intent.getStringExtra("dishImgURI");
         Glide.with(this)
-                .load(imgURI)
+                .load(imgURL)
                 .into(tvFoodPic);
         tvMark = findViewById(R.id.txv_mark);
         String mark = intent.getStringExtra("dishMark");
@@ -128,7 +129,7 @@ public class FoodDetailsActivity extends AppCompatActivity {
                         {
                             Map<String,Object> updateDate = new HashMap<>();
                             String quantity = tvAmount.getText().toString();
-//                            updateDate.put("quantity", quantity);
+                            updateDate.put("amount", Integer.parseInt(quantity));
                             Pattern p = Pattern.compile("\\d+");
                             String priceStr = tvPrice.getText().toString();
                             Matcher m = p.matcher(priceStr);
@@ -137,6 +138,9 @@ public class FoodDetailsActivity extends AppCompatActivity {
                                 price = Integer.parseInt(m.group());
                             }
                             updateDate.put("price", price*Integer.parseInt(quantity));
+                            updateDate.put("category", tvComment.getText().toString());
+                            updateDate.put("image", imgURL);
+                            updateDate.put("name", tvDish.getText().toString());
                             userCart.child(tvDish.getText().toString())
                                     .updateChildren(updateDate);
 //                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -160,7 +164,7 @@ public class FoodDetailsActivity extends AppCompatActivity {
                         {
                             Map<String,Object> updateDate = new HashMap<>();
                             String quantity = tvAmount.getText().toString();
-//                            updateDate.put("quantity", quantity);
+                            updateDate.put("amount", Integer.parseInt(quantity));
                             Pattern p = Pattern.compile("\\d+");
                             String priceStr = tvPrice.getText().toString();
                             Matcher m = p.matcher(priceStr);
@@ -169,6 +173,9 @@ public class FoodDetailsActivity extends AppCompatActivity {
                                 price = Integer.parseInt(m.group());
                             }
                             updateDate.put("price", price*Integer.parseInt(quantity));
+                            updateDate.put("category", tvComment.getText().toString());
+                            updateDate.put("image", imgURL);
+                            updateDate.put("name", tvDish.getText().toString());
                             userCart.child(tvDish.getText().toString())
                                     .setValue(updateDate);
                         }
