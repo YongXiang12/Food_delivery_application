@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -16,6 +17,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.BufferedReader;
@@ -28,10 +30,11 @@ import fcu.mp110.food_delivery_app.R;
 import fcu.mp110.food_delivery_app.SwipeControllerActions;
 import fcu.mp110.food_delivery_app.ui.order.OrderStatusActivity;
 
-public class CartActivity extends AppCompatActivity implements IDrinkLoadListener{
+public class CartActivity extends AppCompatActivity implements IDrinkLoadListener {
 
     IDrinkLoadListener cartItemLoadListener;
-    private  CartItemsDataAdapter mAdapter;
+    private CartItemsDataAdapter mAdapter;
+    private List<CartItem> cartItems;
     private DatabaseReference mDatabase;
     private TextView tvDetail;
 
@@ -47,6 +50,29 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
 //        setPlayersDataAdapter();
         loadDrinkFromFirebase();
 //        setupRecyclerView();
+    }
+
+    public void updateCartItems(int position, CartItem cartItem){
+        cartItems.set(position, cartItem);
+    }
+
+    public void setOrderInfo() {
+        int totalPrice = 0;
+        int deliveryCharge = 10;
+        int subtotal = cartItems.size();
+        int discount = 0;
+        for (CartItem c : cartItems) {
+            totalPrice += c.getPrice();
+            deliveryCharge += c.getAmount() * 3;
+        }
+        TextView tvSubtotal = this.findViewById(R.id.txv_subtotal_price);
+        tvSubtotal.setText(String.valueOf(subtotal));
+        TextView tvCharge = this.findViewById(R.id.txv_delivery_charge_price);
+        tvCharge.setText("$" + String.valueOf(deliveryCharge));
+        TextView tvDiscount = this.findViewById(R.id.txv_discount_price);
+        tvDiscount.setText("$" + String.valueOf(discount));
+        TextView tvTotal = this.findViewById(R.id.txv_total_price);
+        tvTotal.setText("$" + String.valueOf(totalPrice));
     }
 
     private void setPlayersDataAdapter() {
@@ -71,13 +97,13 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
 
         }
 
-        mAdapter = new CartItemsDataAdapter(cartItems);
+        mAdapter = new CartItemsDataAdapter(this, cartItems);
     }
 
     private void loadDrinkFromFirebase() {
-        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.lv_oders);
-        List<CartItem> cartItems = new ArrayList<>();
-        mAdapter = new CartItemsDataAdapter(cartItems);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.lv_oders);
+        cartItems = new ArrayList<>();
+        mAdapter = new CartItemsDataAdapter(this, cartItems);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(mAdapter);
         FirebaseDatabase.getInstance()
@@ -86,14 +112,13 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.exists())
-                        {
-                            for(DataSnapshot orderSnapshot: snapshot.getChildren())
-                            {
+                        if (snapshot.exists()) {
+                            for (DataSnapshot orderSnapshot : snapshot.getChildren()) {
                                 CartItem item = orderSnapshot.getValue(CartItem.class);
                                 item.setKey(orderSnapshot.getKey());
                                 cartItems.add(item);
                             }
+                            setOrderInfo();
                             mAdapter.notifyDataSetChanged();
                         }
                     }
@@ -106,15 +131,23 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
         SwipeController swipeController = new SwipeController(new SwipeControllerActions() {
             @Override
             public void onRightClicked(int position) {
+                String del = mAdapter.cartItems.get(position).getName();
+                FirebaseDatabase.getInstance()
+                        .getReference("Cart")
+                        .child("UNIQUE_USER_ID")
+                        .child(del)
+                        .removeValue();
                 mAdapter.cartItems.remove(position);
                 mAdapter.notifyItemRemoved(position);
                 mAdapter.notifyItemRangeChanged(position, mAdapter.getItemCount());
+
             }
 
             @Override
             public void onLeftClicked(int position) {
-                mAdapter.cartItems.get(position).setName("TEST");
-                mAdapter.notifyItemRangeChanged(position, mAdapter.getItemCount());
+//                mAdapter.cartItems.get(position).setName("TEST");
+//                mAdapter.notifyItemRangeChanged(position, mAdapter.getItemCount());
+                finish();
             }
         });
 
@@ -130,7 +163,7 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
     }
 
     private void setupRecyclerView() {
-        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.lv_oders);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.lv_oders);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(mAdapter);
 
@@ -169,17 +202,11 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
         startActivity(intent);
     }
 
-    public void addAmount(View view) {
-    }
-
-    public void removeAmount(View view) {
-    }
-
     @Override
     public void onDrinkLoadSuccess(List<CartItem> cartItemList) {
         TextView t = this.findViewById(R.id.textView7);
         t.setText(cartItemList.get(0).getName());
-        mAdapter = new CartItemsDataAdapter(cartItemList);
+        mAdapter = new CartItemsDataAdapter(this,cartItemList);
 //        setupRecyclerView();
     }
 

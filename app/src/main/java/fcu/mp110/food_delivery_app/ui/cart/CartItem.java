@@ -4,10 +4,19 @@ public class CartItem {
     private String key;
     private String name;
     private String category;
+    private int amount;
     private int price;
     private String image;
 
     public CartItem() {
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     public String getKey() {
