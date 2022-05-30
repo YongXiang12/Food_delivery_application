@@ -132,33 +132,22 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
             @Override
             public void onRightClicked(int position) {
                 String del = mAdapter.cartItems.get(position).getName();
+                FirebaseDatabase.getInstance()
+                        .getReference("Cart")
+                        .child("UNIQUE_USER_ID")
+                        .child(del)
+                        .removeValue();
                 mAdapter.cartItems.remove(position);
                 mAdapter.notifyItemRemoved(position);
                 mAdapter.notifyItemRangeChanged(position, mAdapter.getItemCount());
 
-                DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("UNIQUE_USER_ID");
-//                Query applesQuery = ref.orderByChild("name").equalTo("CaramelMacchiato");
-                Query applesQuery = ref.equalTo("CaramelMacchiato", "name");
-
-                applesQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
-                            snapshot.getRef().removeValue();
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Log.e("TAG", "onCancelled", databaseError.toException());
-                    }
-                });
             }
 
             @Override
             public void onLeftClicked(int position) {
-                mAdapter.cartItems.get(position).setName("TEST");
-                mAdapter.notifyItemRangeChanged(position, mAdapter.getItemCount());
+//                mAdapter.cartItems.get(position).setName("TEST");
+//                mAdapter.notifyItemRangeChanged(position, mAdapter.getItemCount());
+                finish();
             }
         });
 
