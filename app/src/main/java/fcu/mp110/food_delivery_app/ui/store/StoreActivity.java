@@ -22,7 +22,10 @@ public class StoreActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
+    public void ModitfyItems(View view){
+        Intent intent = new Intent(this , ModifyItemActivity.class);
+        startActivity(intent);
+    }
 
 
 
