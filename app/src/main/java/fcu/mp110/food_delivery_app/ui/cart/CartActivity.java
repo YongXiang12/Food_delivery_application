@@ -1,11 +1,13 @@
 package fcu.mp110.food_delivery_app.ui.cart;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
@@ -132,15 +134,30 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
             @Override
             public void onRightClicked(int position) {
                 String del = mAdapter.cartItems.get(position).getName();
-                FirebaseDatabase.getInstance()
-                        .getReference("Cart")
-                        .child("UNIQUE_USER_ID")
-                        .child(del)
-                        .removeValue();
-                mAdapter.cartItems.remove(position);
-                mAdapter.notifyItemRemoved(position);
-                mAdapter.notifyItemRangeChanged(position, mAdapter.getItemCount());
-
+                AlertDialog dialog = new AlertDialog.Builder(findViewById(R.id.root).getContext())
+                        .setTitle("Delete item")
+                        .setMessage("Do you really want to delete item")
+                        .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        })
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                FirebaseDatabase.getInstance()
+                                        .getReference("Cart")
+                                        .child("UNIQUE_USER_ID")
+                                        .child(del)
+                                        .removeValue();
+                                mAdapter.cartItems.remove(position);
+                                mAdapter.notifyItemRemoved(position);
+                                mAdapter.notifyItemRangeChanged(position, mAdapter.getItemCount());
+                                dialogInterface.dismiss();
+                            }
+                        }).create();
+                dialog.show();
             }
 
             @Override
