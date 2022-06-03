@@ -64,6 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20px"
             android:background="@drawable/while_nostroke_corner"
+            android:onClick="ModitfyItems"
             android:text="調整/新增菜單"
             android:textColor="#FFF34D85"
             android:textSize="23sp"

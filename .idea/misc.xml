@@ -3,6 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/Food_delivery_application/app/src/main/res/drawable/no_click_togglebutton.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/Food_delivery_application/app/src/main/res/drawable/pink_round_corner.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/Food_delivery_application/app/src/main/res/drawable/rounded_conner.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/Food_delivery_application/app/src/main/res/drawable/search_textfield_shape.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/Food_delivery_application/app/src/main/res/drawable/side_nav_bar.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/Food_delivery_application/app/src/main/res/drawable/while_nostroke_corner.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/Food_delivery_application/app/src/main/res/layout/activity_add_new_items.xml" value="0.2" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/Food_delivery_application/app/src/main/res/layout/activity_cart.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/Food_delivery_application/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/Food_delivery_application/app/src/main/res/layout/activity_main2.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/Food_delivery_application/app/src/main/res/layout/activity_modify_item.xml" value="0.22" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/Food_delivery_application/app/src/main/res/layout/activity_store.xml" value="0.22" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/Food_delivery_application/app/src/main/res/layout/cart_item.xml" value="0.2084942084942085" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/Food_delivery_application/app/src/main/res/layout/modify_row.xml" value="0.2" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/Food_delivery_application/app/src/main/res/layout/modify_rows.xml" value="0.2" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Food_delivery_application/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Food_delivery_application/app/src/main/res/layout/app_bar_main.xml" value="0.1" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/Food_delivery_application/app/src/main/res/layout/content_main.xml" value="0.1" />
@@ -23,7 +38,7 @@
         <entry key="..\:/Users/maxchen/AndroidStudioProjects/Food_delivery_application/app/src/main/res/layout/activity_main.xml" value="0.1361111111111111" />
         <entry key="..\:/Users/maxchen/AndroidStudioProjects/Food_delivery_application/app/src/main/res/layout/activity_register.xml" value="0.1461499493414387" />
         <entry key="..\:/Users/maxchen/AndroidStudioProjects/Food_delivery_application/app/src/main/res/layout/activity_register_new.xml" value="0.1461499493414387" />
-        <entry key="..\:/Users/maxchen/AndroidStudioProjects/Food_delivery_application/app/src/main/res/layout/activity_restaurant_menu.xml" value="0.1" />
+        <entry key="..\:/Users/maxchen/AndroidStudioProjects/Food_delivery_application/app/src/main/res/layout/activity_restaurant_menu.xml" value="0.25" />
         <entry key="..\:/Users/maxchen/AndroidStudioProjects/Food_delivery_application/app/src/main/res/layout/activity_restaurant_menu2.xml" value="0.1875" />
         <entry key="..\:/Users/maxchen/AndroidStudioProjects/Food_delivery_application/app/src/main/res/layout/activity_store.xml" value="0.18489583333333334" />
         <entry key="..\:/Users/maxchen/AndroidStudioProjects/Food_delivery_application/app/src/main/res/layout/app_bar_main.xml" value="0.33" />
@@ -55,9 +70,8 @@
         <entry key="..\:/Users/maxchen/AndroidStudioProjects/nav4/app/src/main/res/layout/nav_header_main.xml" value="0.14722222222222223" />
         <entry key="..\:/Users/maxchen/AndroidStudioProjects/nav4/app/src/main/res/menu/activity_main_drawer.xml" value="0.67" />
         <entry key="..\:/Users/maxchen/AndroidStudioProjects/nav4/app/src/main/res/menu/main.xml" value="0.67" />
-        <entry key="..\:/Users/samel/AndroidStudioProjects/Food_delivery_application/app/src/main/res/layout/activity_cart.xml" value="0.1" />
-        <entry key="..\:/Users/samel/AndroidStudioProjects/Food_delivery_application/app/src/main/res/layout/activity_food_details.xml" value="0.1" />
-        <entry key="..\:/Users/samel/AndroidStudioProjects/Food_delivery_application/app/src/main/res/layout/cart_item.xml" value="0.1" />
+        <entry key="..\:/Users/samel/AndroidStudioProjects/Food_delivery_application/app/src/main/res/layout/restaurant_menu_grid_layout.xml" value="0.1408514492753623" />
+        <entry key="..\:/Users/samel/AndroidStudioProjects/Food_delivery_application/app/src/main/res/layout/restaurantlistitem.xml" value="0.22" />
       </map>
     </option>
   </component>

@@ -14,38 +14,48 @@
             android:id="@+id/info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_alignParentTop="true"
             android:paddingLeft="16dp"
             android:paddingRight="16dp">
 
-            <ImageView
-                android:id="@+id/imv_back"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:scaleType="fitXY"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="30dp"
-                android:onClick="goBack"
-                android:src="@drawable/icons8_back_48px" />
 
-            <ImageView
-                android:id="@+id/imv_thumbnail"
-                android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/hawwaipizza" />
 
             <TextView
                 android:id="@+id/txv_dish"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/imv_thumbnail"
+                android:layout_below="@+id/menucardview"
                 android:layout_alignParentLeft="true"
                 android:layout_marginTop="8dp"
                 android:hint="店名"
                 android:textSize="32dp" />
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/menucardview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="10dp">
+
+
+
+                <ImageView
+                    android:id="@+id/imv_thumbnail"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/hawwaipizza" />
+                <ImageView
+                    android:id="@+id/imv_back"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="30dp"
+                    android:onClick="goBack"
+                    android:src="@drawable/icons8_back_48px" />
+
+            </androidx.cardview.widget.CardView>
             <ImageView
                 android:id="@+id/imv_star"
                 android:layout_width="20dp"
@@ -73,8 +83,8 @@
                 android:layout_below="@+id/txv_dish"
                 android:layout_marginTop="10dp"
                 android:layout_toRightOf="@+id/txv_mark"
-                android:paddingLeft="10dp"
                 android:onClick="goReviewActivity"
+                android:paddingLeft="10dp"
                 android:text="@string/txv_label_see_review"
                 android:textColor="#FF5722"
                 android:textSize="16dp" />
@@ -107,6 +117,8 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/txv_label_popularity"
                 android:textSize="20dp" />
+
+
         </RelativeLayout>
 
         <GridView
