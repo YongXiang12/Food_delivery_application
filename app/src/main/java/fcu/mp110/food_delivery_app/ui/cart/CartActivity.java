@@ -11,7 +11,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -19,7 +18,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.BufferedReader;
@@ -29,7 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fcu.mp110.food_delivery_app.R;
-import fcu.mp110.food_delivery_app.SwipeControllerActions;
 import fcu.mp110.food_delivery_app.ui.order.OrderStatusActivity;
 
 public class CartActivity extends AppCompatActivity implements IDrinkLoadListener {

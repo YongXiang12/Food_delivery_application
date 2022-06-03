@@ -1,4 +1,4 @@
-package fcu.mp110.food_delivery_app;
+package fcu.mp110.food_delivery_app.ui.cart;
 
 public abstract class SwipeControllerActions {
 

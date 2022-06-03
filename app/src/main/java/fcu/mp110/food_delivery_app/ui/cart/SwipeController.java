@@ -15,8 +15,6 @@ import android.view.View;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import fcu.mp110.food_delivery_app.SwipeControllerActions;
-
 enum ButtonsState {
     GONE,
     LEFT_VISIBLE,
