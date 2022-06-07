@@ -75,18 +75,38 @@ public class FoodDetailsActivity extends AppCompatActivity {
         tvComment = findViewById(R.id.txv_comment);
         tvComment.setText("Test");
 
+        String restaurantKey = intent.getStringExtra("RestaurantKey");
         ArrayList<DishesCustomizationItem> customizationList =
                 new ArrayList<DishesCustomizationItem>();
-        customizationList.add(new DishesCustomizationItem(R.drawable.icons8_star_96px,
-                "Pepper Julienned", "+$10"));
-        customizationList.add(new DishesCustomizationItem(R.drawable.icons8_star_96px,
-                "Baby Spinach", "+$10"));
-        customizationList.add(new DishesCustomizationItem(R.drawable.icons8_star_96px,
-                "Mushroom", "+$15"));
         adapter = new CustomizationAdapter(this,
                 R.layout.dishes_customization, customizationList);
         lvCustomization = findViewById(R.id.lv_conditions);
         lvCustomization.setAdapter(adapter);
+
+        DatabaseReference customizationRef;
+        customizationRef = FirebaseDatabase.getInstance()
+                .getReference("Customization")
+                .child(restaurantKey);
+        customizationRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for(DataSnapshot dataSnapshot:snapshot.getChildren()){
+                        DishesCustomizationItem dishesCustomizationItem = dataSnapshot.getValue(DishesCustomizationItem.class);
+                        dishesCustomizationItem.setKey(dataSnapshot.getKey());
+                        Log.v("MyApp", (dishesCustomizationItem.getCustomizationName()));
+                        customizationList.add(dishesCustomizationItem);
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+        });
 
     }
 

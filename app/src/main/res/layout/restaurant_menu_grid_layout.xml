@@ -66,10 +66,11 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imv_thumbnail"
                 android:layout_alignParentLeft="true"
+                android:layout_marginLeft="8dp"
                 android:ellipsize="end"
                 android:singleLine="true"
                 android:text="Pizza"
-                android:textSize="32dp" />
+                android:textSize="20dp" />
 
             <ImageView
                 android:id="@+id/imv_star"
@@ -78,17 +79,6 @@
                 android:layout_above="@+id/txv_dish_name"
                 android:layout_alignParentLeft="true"
                 android:src="@drawable/icons8_star_96px" />
-
-            <TextView
-                android:id="@+id/txv_dish_ingredients"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/txv_dish_name"
-                android:layout_alignParentLeft="true"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:text="Chicken, Cheese"
-                android:textSize="20dp" />
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

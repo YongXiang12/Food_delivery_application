@@ -1,16 +1,26 @@
 package fcu.mp110.food_delivery_app.ui.restaurant;
 
-import android.os.Parcel;
-
 public class DishesCustomizationItem{
     private int imgResId;
-    private String customization;
+    private String customizationName;
     private String price;
     private boolean checked;
+    private String key;
 
-    public DishesCustomizationItem(int imgResId, String customization, String price) {
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public DishesCustomizationItem() {
+    }
+
+    public DishesCustomizationItem(int imgResId, String customizationName, String price) {
         this.imgResId = imgResId;
-        this.customization = customization;
+        this.customizationName = customizationName;
         this.price = price;
         this.checked = false;
     }
@@ -23,12 +33,12 @@ public class DishesCustomizationItem{
         this.imgResId = imgResId;
     }
 
-    public String getCustomization() {
-        return customization;
+    public String getCustomizationName() {
+        return customizationName;
     }
 
-    public void setCustomization(String customization) {
-        this.customization = customization;
+    public void setCustomizationName(String customizationName) {
+        this.customizationName = customizationName;
     }
 
     public String getPrice() {

@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -44,10 +43,10 @@ public class CustomizationAdapter extends ArrayAdapter<DishesCustomizationItem> 
         }
 
         DishesCustomizationItem item = dishesItems.get(position);
-        ImageView ivDescribe = itemLayout.findViewById(R.id.imv_describe);
-        ivDescribe.setImageResource(item.getImgResId());
+//        ImageView ivDescribe = itemLayout.findViewById(R.id.imv_describe);
+//        ivDescribe.setImageResource(item.getImgResId());
         TextView tvCustomization = itemLayout.findViewById(R.id.txv_customization);
-        tvCustomization.setText(item.getCustomization());
+        tvCustomization.setText(item.getCustomizationName());
         TextView tvAddPrice = itemLayout.findViewById(R.id.txv_add_price);
         tvAddPrice.setText(item.getPrice());
         CheckBox rbtChoice = itemLayout.findViewById(R.id.chbt_choice);

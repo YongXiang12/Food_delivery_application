@@ -85,6 +85,7 @@ public class RestaurantMenuBaseAdapter extends BaseAdapter {
                 intent.putExtra("dishPrice", item.getPrice());
 //                intent.putExtra("dishMark", item.getTvMark());
                 intent.putExtra("dishImgURI", item.getMenuImgURI());
+                intent.putExtra("RestaurantKey", item.getRestaurantKey());
                 context.startActivity(intent);
             }
         });

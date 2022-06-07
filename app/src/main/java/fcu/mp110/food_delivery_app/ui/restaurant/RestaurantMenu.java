@@ -71,6 +71,7 @@ public class RestaurantMenu extends AppCompatActivity {
                     for(DataSnapshot dataSnapshot:snapshot.getChildren()){
                         RestaurantMenuGridItem menuItem = dataSnapshot.getValue(RestaurantMenuGridItem.class);
                         menuItem.setKey(dataSnapshot.getKey());
+                        menuItem.setRestaurantKey(restaurantKey);
                         //Log.v("MyApp", (menuItem.getMenuImgURI()));
                         menuGridItems.add(menuItem);
 
