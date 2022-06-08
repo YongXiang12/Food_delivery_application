@@ -19,6 +19,7 @@ import java.util.List;
 
 import fcu.mp110.food_delivery_app.MainActivity;
 import fcu.mp110.food_delivery_app.R;
+import fcu.mp110.food_delivery_app.ui.search.SearchResultPage;
 
 public class RestaurantArrayAdapter extends RecyclerView.Adapter<RestaurantArrayAdapter.ViewHolder> {
     public List<RestaurantItem> restaurantItemList;
@@ -26,6 +27,11 @@ public class RestaurantArrayAdapter extends RecyclerView.Adapter<RestaurantArray
 
 
     public RestaurantArrayAdapter(MainActivity context, ArrayList<RestaurantItem> restaurantItems) {
+        this.context = context;
+        this.restaurantItemList = restaurantItems;
+    }
+
+    public RestaurantArrayAdapter(SearchResultPage context, ArrayList<RestaurantItem> restaurantItems) {
         this.context = context;
         this.restaurantItemList = restaurantItems;
     }

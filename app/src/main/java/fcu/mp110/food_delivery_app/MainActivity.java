@@ -130,6 +130,8 @@ public class MainActivity extends AppCompatActivity {
         DatabaseReference restaurantRef;
         restaurantRef = FirebaseDatabase.getInstance()
                 .getReference("Restaurant");
+
+
         restaurantRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -139,7 +141,6 @@ public class MainActivity extends AppCompatActivity {
                         restaurantItem.setKey(dataSnapshot.getKey());
                         restaurantItem.getRestaurantLabel();
                         restaurantList.add(restaurantItem);
-
                     }
                     adapter.notifyDataSetChanged();
                 }
