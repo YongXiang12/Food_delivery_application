@@ -13,6 +13,12 @@
         android:theme="@style/Theme.Nav4.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.favorite.FavoriteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.restaurant.MyoderActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.store.AddNewItems"
             android:exported="false" />
         <activity
