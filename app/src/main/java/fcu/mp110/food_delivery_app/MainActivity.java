@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,6 +30,7 @@ import java.util.ArrayList;
 import fcu.mp110.food_delivery_app.databinding.ActivityMainBinding;
 
 import fcu.mp110.food_delivery_app.ui.cart.CartActivity;
+import fcu.mp110.food_delivery_app.ui.favorite.FavoriteActivity;
 import fcu.mp110.food_delivery_app.ui.restaurant.CategoriesArrayAdapter;
 import fcu.mp110.food_delivery_app.ui.restaurant.CategoriesItem;
 import fcu.mp110.food_delivery_app.ui.restaurant.RestaurantArrayAdapter;
@@ -69,6 +71,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, CartActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        ImageView favorite = findViewById(R.id.main_favorite_img);
+        favorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(MainActivity.this, FavoriteActivity.class);
+                startActivity(it);
             }
         });
         /*ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

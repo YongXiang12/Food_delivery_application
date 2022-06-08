@@ -6,6 +6,7 @@ public class RestaurantMenuGridItem {
 
     private String menuImgURI;
     private String key;
+    private String restaurantKey;
     private String price;
     private String mark;
     private String dishName;
@@ -13,6 +14,14 @@ public class RestaurantMenuGridItem {
 
     public RestaurantMenuGridItem() {
 
+    }
+
+    public String getRestaurantKey() {
+        return restaurantKey;
+    }
+
+    public void setRestaurantKey(String restaurantKey) {
+        this.restaurantKey = restaurantKey;
     }
 
     public void setKey(String key) {

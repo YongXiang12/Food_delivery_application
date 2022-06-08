@@ -41,13 +41,14 @@
 
 
             <ImageView
-                android:id="@+id/toolbar_pro_img"
+                android:id="@+id/main_favorite_img"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_gravity="right"
                 android:layout_marginRight="10dp"
                 android:contentDescription="@string/nav_header_desc"
-                app:srcCompat="@drawable/ic_baseline_favorite_border_30" />
+
+                app:srcCompat="@drawable/favourite" />
         </androidx.appcompat.widget.Toolbar>
 
         <LinearLayout
