@@ -13,8 +13,17 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,9 +35,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -239,94 +251,186 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
     }
 
     public void sendOrder(View view) {
-        DatabaseReference userCart = FirebaseDatabase
-                .getInstance().getReference("Order").child("Mcdonald");
-        userCart.child("UNIQUE_USER_ID")
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.exists())
-                        {
-//                            Map<String,Object> updateDate = new HashMap<>();
+        AlertDialog.Builder builder = new AlertDialog.Builder(findViewById(R.id.root).getContext());
+        builder.setTitle("One more step!");
 
-                            List<Object> detailUpdateDate = new ArrayList<>();
-                            for(CartItem cartItem:mAdapter.cartItems){
-                                Map<String,Object> detail = new HashMap<>();
-                                detail.put("name",cartItem.getName());
-                                detail.put("price",cartItem.getPrice());
-                                detail.put("amounts",cartItem.getAmount());
-                                detailUpdateDate.add(detail);
-                            }
+        View viewForCheck = LayoutInflater.from(findViewById(R.id.root).getContext())
+                .inflate(R.layout.layout_place_order, null);
 
-                            TextView tvCharge =
-                                    CartActivity.this.findViewById(R.id.txv_delivery_charge_price);
-                            TextView tvDiscount =
-                                    CartActivity.this.findViewById(R.id.txv_discount_price);
-                            TextView tvTotal = CartActivity.this.findViewById(R.id.txv_total_price);
+        EditText edtAddress = (EditText) viewForCheck.findViewById(R.id.edt_address);
+        RadioButton rdiHome = (RadioButton) viewForCheck.findViewById(R.id.rdi_home_address);
+        RadioButton rdiOtherAddress = (RadioButton) viewForCheck.findViewById(R.id.rdi_other_address);
+        RadioButton rdiShipToThis = (RadioButton) viewForCheck.findViewById(R.id.rdi_ship_this_address);
+        Spinner spiChooseRestaurant = (Spinner) viewForCheck.findViewById(R.id.spi_choose_restaurant);
 
+        DatabaseReference restaurantReference = FirebaseDatabase
+                .getInstance().getReference("Restaurant");
 
-                            int totalPrice = 0;
-                            totalPrice = parsePrice(tvTotal.getText().toString()) +
-                                    parsePrice(tvCharge.getText().toString()) -
-                                    parsePrice(tvDiscount.getText().toString());
-//                            updateDate.put("detail", detailUpdateDate);
-//                            updateDate.put("totalPrice", totalPrice);
-//                            updateDate.put("restaurant", "");
-//                            updateDate.put("username", "UNIQUE_USER_ID");
+//        List<String> tempSet = new ArrayList<String>();
+        Set<String> words = new LinkedHashSet<>();
+        for(CartItem cartItem:mAdapter.cartItems){
+            String key = cartItem.getCategory();
+//            tempSet.add(key);
+            words.add(key);
+        }
+        
+//        String[] stringArray = tempSet.toArray(new String[0]);
+        String[] stringArray = words.toArray(new String[0]);
+        ArrayAdapter<String> tempAd = new ArrayAdapter<>(CartActivity.this,
+                android.R.layout.simple_spinner_item, stringArray);
+        tempAd.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spiChooseRestaurant.setAdapter(tempAd);
+        spiChooseRestaurant.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                            UserOrder userOrder = new UserOrder(
-                                    "UNIQUE_USER_ID", "Mcdonald", totalPrice,
-                                    true, detailUpdateDate);
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
-                            userCart.child("UNIQUE_USER_ID")
-                                    .setValue(userOrder);
-                        }
-                        else
-                        {
-//                            Map<String,Object> updateDate = new HashMap<>();
-
-                            List<Object> detailUpdateDate = new ArrayList<>();
-                            for(CartItem cartItem:mAdapter.cartItems){
-                                Map<String,Object> detail = new HashMap<>();
-                                detail.put("name",cartItem.getName());
-                                detail.put("price",cartItem.getPrice());
-                                detail.put("amounts",cartItem.getAmount());
-                                detailUpdateDate.add(detail);
-                            }
+            }
+        });
+        edtAddress.setText("407台中市西屯區文華路100號");
 
 
-                            TextView tvCharge = CartActivity.this.findViewById(R.id.txv_delivery_charge_price);
+        rdiHome.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b)
+                {
+                    edtAddress.setText("407台中市西屯區文華路100號");
+                }
+            }
+        });
+        rdiOtherAddress.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b)
+                {
+                    edtAddress.setText(""); //Clear
+                    edtAddress.setHint("Enter your address");
+                }
+            }
+        });
+        rdiShipToThis.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b)
+                {
+                    Toast.makeText(findViewById(R.id.root).getContext(),
+                            "Implement late with Google API", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
-                            TextView tvDiscount = CartActivity.this.findViewById(R.id.txv_discount_price);
-
-                            TextView tvTotal = CartActivity.this.findViewById(R.id.txv_total_price);
 
 
-                            int totalPrice = 0;
-                            totalPrice = parsePrice(tvTotal.getText().toString()) +
-                                    parsePrice(tvCharge.getText().toString()) -
-                                    parsePrice(tvDiscount.getText().toString());
-//                            updateDate.put("detail", detailUpdateDate);
-//                            updateDate.put("totalPrice", totalPrice);
-//                            updateDate.put("restaurant", "");
-//                            updateDate.put("username", "UNIQUE_USER_ID");
-                            UserOrder userOrder = new UserOrder(
-                                    "UNIQUE_USER_ID", "Mcdonald", totalPrice,
-                                    true, detailUpdateDate);
-                            userCart.child("UNIQUE_USER_ID")
-                                    .setValue(userOrder);
-                        }
-                    }
+        builder.setView(viewForCheck);
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        }).setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(findViewById(R.id.root).getContext(),
+                        "Implrment late", Toast.LENGTH_SHORT).show();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
-        Intent intent = new Intent(this, OrderStatusActivity.class);
-        startActivity(intent);
-        finish();
+//        DatabaseReference userCart = FirebaseDatabase
+//                .getInstance().getReference("Order").child("Mcdonald");
+//        userCart.child("UNIQUE_USER_ID")
+//                .addListenerForSingleValueEvent(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        if(snapshot.exists())
+//                        {
+////                            Map<String,Object> updateDate = new HashMap<>();
+//
+//                            List<Object> detailUpdateDate = new ArrayList<>();
+//                            for(CartItem cartItem:mAdapter.cartItems){
+//                                Map<String,Object> detail = new HashMap<>();
+//                                detail.put("name",cartItem.getName());
+//                                detail.put("price",cartItem.getPrice());
+//                                detail.put("amounts",cartItem.getAmount());
+//                                detailUpdateDate.add(detail);
+//                            }
+//
+//                            TextView tvCharge =
+//                                    CartActivity.this.findViewById(R.id.txv_delivery_charge_price);
+//                            TextView tvDiscount =
+//                                    CartActivity.this.findViewById(R.id.txv_discount_price);
+//                            TextView tvTotal = CartActivity.this.findViewById(R.id.txv_total_price);
+//
+//
+//                            int totalPrice = 0;
+//                            totalPrice = parsePrice(tvTotal.getText().toString()) +
+//                                    parsePrice(tvCharge.getText().toString()) -
+//                                    parsePrice(tvDiscount.getText().toString());
+////                            updateDate.put("detail", detailUpdateDate);
+////                            updateDate.put("totalPrice", totalPrice);
+////                            updateDate.put("restaurant", "");
+////                            updateDate.put("username", "UNIQUE_USER_ID");
+//
+//                            UserOrder userOrder = new UserOrder(
+//                                    "UNIQUE_USER_ID", "Mcdonald", totalPrice,
+//                                    true,true, detailUpdateDate);
+//
+//
+//                            userCart.child("UNIQUE_USER_ID")
+//                                    .setValue(userOrder);
+//                        }
+//                        else
+//                        {
+////                            Map<String,Object> updateDate = new HashMap<>();
+//
+//                            List<Object> detailUpdateDate = new ArrayList<>();
+//                            for(CartItem cartItem:mAdapter.cartItems){
+//                                Map<String,Object> detail = new HashMap<>();
+//                                detail.put("name",cartItem.getName());
+//                                detail.put("price",cartItem.getPrice());
+//                                detail.put("amounts",cartItem.getAmount());
+//                                detailUpdateDate.add(detail);
+//                            }
+//
+//
+//                            TextView tvCharge = CartActivity.this.findViewById(R.id.txv_delivery_charge_price);
+//
+//                            TextView tvDiscount = CartActivity.this.findViewById(R.id.txv_discount_price);
+//
+//                            TextView tvTotal = CartActivity.this.findViewById(R.id.txv_total_price);
+//
+//
+//                            int totalPrice = 0;
+//                            totalPrice = parsePrice(tvTotal.getText().toString()) +
+//                                    parsePrice(tvCharge.getText().toString()) -
+//                                    parsePrice(tvDiscount.getText().toString());
+////                            updateDate.put("detail", detailUpdateDate);
+////                            updateDate.put("totalPrice", totalPrice);
+////                            updateDate.put("restaurant", "");
+////                            updateDate.put("username", "UNIQUE_USER_ID");
+//                            UserOrder userOrder = new UserOrder(
+//                                    "UNIQUE_USER_ID", "Mcdonald", totalPrice,
+//                                    true,true, detailUpdateDate);
+//                            userCart.child("UNIQUE_USER_ID")
+//                                    .setValue(userOrder);
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                    }
+//                });
+//        Intent intent = new Intent(this, OrderStatusActivity.class);
+//        startActivity(intent);
+//        finish();
     }
 
     private int parsePrice(String s){

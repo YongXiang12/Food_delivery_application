@@ -51,6 +51,7 @@ public class FoodDetailsActivity extends AppCompatActivity {
     private ListView lvCustomization;
     private CustomizationAdapter adapter;
     private String restaurantKey;
+    private String restaurantName;
     private String name;
     private String mark;
     private String price;
@@ -78,7 +79,7 @@ public class FoodDetailsActivity extends AppCompatActivity {
         tvPrice.setText(price);
         tvComment = findViewById(R.id.txv_comment);
         tvComment.setText("Test");
-
+        restaurantName = intent.getStringExtra("RestaurantName");
         restaurantKey = intent.getStringExtra("RestaurantKey");
         ArrayList<DishesCustomizationItem> customizationList =
                 new ArrayList<DishesCustomizationItem>();
@@ -163,7 +164,7 @@ public class FoodDetailsActivity extends AppCompatActivity {
                                 price = Integer.parseInt(m.group());
                             }
                             updateDate.put("price", price*Integer.parseInt(quantity));
-                            updateDate.put("category", tvComment.getText().toString());
+                            updateDate.put("category", restaurantKey+" "+restaurantName);
                             updateDate.put("image", imgURL);
                             updateDate.put("name", tvDish.getText().toString());
                             userCart.child(tvDish.getText().toString())
@@ -198,7 +199,7 @@ public class FoodDetailsActivity extends AppCompatActivity {
                                 price = Integer.parseInt(m.group());
                             }
                             updateDate.put("price", price*Integer.parseInt(quantity));
-                            updateDate.put("category", tvComment.getText().toString());
+                            updateDate.put("category", restaurantKey+" "+restaurantName);
                             updateDate.put("image", imgURL);
                             updateDate.put("name", tvDish.getText().toString());
                             userCart.child(tvDish.getText().toString())

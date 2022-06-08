@@ -32,9 +32,11 @@ import fcu.mp110.food_delivery_app.ui.cart.CartItem;
 public class RestaurantMenuBaseAdapter extends BaseAdapter {
     Context context;
     private List<RestaurantMenuGridItem> gridItems;
+    private String restaurantName;
 
-    public RestaurantMenuBaseAdapter(Context c, List<RestaurantMenuGridItem> gridItems) {
+    public RestaurantMenuBaseAdapter(Context c,String name, List<RestaurantMenuGridItem> gridItems) {
         this.context = c;
+        this.restaurantName = name;
         this.gridItems = gridItems;
     }
 
@@ -84,6 +86,7 @@ public class RestaurantMenuBaseAdapter extends BaseAdapter {
                 intent.putExtra("dishName", item.getDishName());
                 intent.putExtra("dishPrice", item.getPrice());
 //                intent.putExtra("dishMark", item.getTvMark());
+                intent.putExtra("RestaurantName", restaurantName);
                 intent.putExtra("dishImgURI", item.getMenuImgURI());
                 intent.putExtra("RestaurantKey", item.getRestaurantKey());
                 context.startActivity(intent);
