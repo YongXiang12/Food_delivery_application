@@ -7,9 +7,11 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -24,27 +26,36 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import fcu.mp110.food_delivery_app.R;
 import fcu.mp110.food_delivery_app.ui.order.OrderStatusActivity;
+import fcu.mp110.food_delivery_app.ui.order.UserOrder;
+import fcu.mp110.food_delivery_app.ui.restaurant.FoodDetailsActivity;
 
 public class CartActivity extends AppCompatActivity implements IDrinkLoadListener {
 
     IDrinkLoadListener cartItemLoadListener;
     private CartItemsDataAdapter mAdapter;
-    private List<CartItem> cartItems;
+//    private List<CartItem> cartItems;
     private DatabaseReference mDatabase;
     private TextView tvDetail;
+    private String imgURL;
+    private String restaurantKey;
+    private String name;
+    private String mark;
+    private String price;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         Intent intent = getIntent();
-//        int count = intent.getIntExtra("checkbox", 0);
-//        tvDetail = findViewById(R.id.txv_detail);
-//        tvDetail.setText(Integer.toString(count));
+
 
 //        setPlayersDataAdapter();
         loadDrinkFromFirebase();
@@ -52,15 +63,15 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
     }
 
     public void updateCartItems(int position, CartItem cartItem){
-        cartItems.set(position, cartItem);
+//        cartItems.set(position, cartItem);
     }
 
     public void setOrderInfo() {
         int totalPrice = 0;
         int deliveryCharge = 10;
-        int subtotal = cartItems.size();
+        int subtotal = mAdapter.cartItems.size();
         int discount = 0;
-        for (CartItem c : cartItems) {
+        for (CartItem c : mAdapter.cartItems) {
             totalPrice += c.getPrice();
             deliveryCharge += c.getAmount() * 3;
         }
@@ -75,33 +86,34 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
     }
 
     private void setPlayersDataAdapter() {
-        List<CartItem> cartItems = new ArrayList<>();
-        try {
-            InputStreamReader is = new InputStreamReader(getAssets().open("players.csv"));
+//        List<CartItem> cartItems = new ArrayList<>();
+//        try {
+//            InputStreamReader is = new InputStreamReader(getAssets().open("players.csv"));
+//
+//            BufferedReader reader = new BufferedReader(is);
+//            reader.readLine();
+//            String line;
+//            String[] st;
+//            while ((line = reader.readLine()) != null) {
+//                st = line.split(",");
+//                CartItem item = new CartItem();
+//                item.setName(st[0]);
+////                item.setPrice(st[1]);
+//                item.setCategory(st[4]);
+//                item.setImage("https://www.highlandscoffee.com.vn/vnt_upload/product/04_2020/TRATHACHVAI_1.png");
+//                cartItems.add(item);
+//            }
+//        } catch (IOException e) {
+//
+//        }
 
-            BufferedReader reader = new BufferedReader(is);
-            reader.readLine();
-            String line;
-            String[] st;
-            while ((line = reader.readLine()) != null) {
-                st = line.split(",");
-                CartItem item = new CartItem();
-                item.setName(st[0]);
-//                item.setPrice(st[1]);
-                item.setCategory(st[4]);
-                item.setImage("https://www.highlandscoffee.com.vn/vnt_upload/product/04_2020/TRATHACHVAI_1.png");
-                cartItems.add(item);
-            }
-        } catch (IOException e) {
-
-        }
-
-        mAdapter = new CartItemsDataAdapter(this, cartItems);
+//        mAdapter = new CartItemsDataAdapter(this,cartItems);
+        mAdapter.notifyDataSetChanged();
     }
 
     private void loadDrinkFromFirebase() {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.lv_oders);
-        cartItems = new ArrayList<>();
+        List<CartItem> cartItems = new ArrayList<>();
         mAdapter = new CartItemsDataAdapter(this, cartItems);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(mAdapter);
@@ -117,8 +129,8 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
                                 item.setKey(orderSnapshot.getKey());
                                 cartItems.add(item);
                             }
-                            setOrderInfo();
                             mAdapter.notifyDataSetChanged();
+                            setOrderInfo();
                         }
                     }
 
@@ -127,10 +139,13 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
                         cartItemLoadListener.onDrinkLoadFailed(error.getMessage());
                     }
                 });
+
         SwipeController swipeController = new SwipeController(new SwipeControllerActions() {
             @Override
             public void onRightClicked(int position) {
-                String del = mAdapter.cartItems.get(position).getName();
+//                String del = mAdapter.cartItems.get(position).getName();
+                String del = cartItems.get(position).getName();
+                cartItems.remove(position);
                 AlertDialog dialog = new AlertDialog.Builder(findViewById(R.id.root).getContext())
                         .setTitle("Delete item")
                         .setMessage("Do you really want to delete item")
@@ -148,13 +163,25 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
                                         .child("UNIQUE_USER_ID")
                                         .child(del)
                                         .removeValue();
-                                mAdapter.cartItems.remove(position);
-                                mAdapter.notifyItemRemoved(position);
-                                mAdapter.notifyItemRangeChanged(position, mAdapter.getItemCount());
+//                                cartItems = new ArrayList<>();
+
+//                                mAdapter.removeItem(position);
+//                                cartItems.remove(position);
+//                                mAdapter.notifyDataSetChanged();
+//                                mAdapter.notifyItemRemoved(position);
+//                                mAdapter.notifyItemRangeChanged(position, mAdapter.getItemCount());
                                 dialogInterface.dismiss();
                             }
                         }).create();
                 dialog.show();
+//                mAdapter = new CartItemsDataAdapter(CartActivity.this, cartItems);
+//                recyclerView.setLayoutManager(new LinearLayoutManager(CartActivity.this, LinearLayoutManager.VERTICAL, false));
+//                recyclerView.setAdapter(mAdapter);
+//                mAdapter.removeItem(position);
+//                cartItems.remove(position);
+                mAdapter.notifyDataSetChanged();
+                mAdapter.notifyItemRemoved(position);
+                mAdapter.notifyItemRangeChanged(position, mAdapter.getItemCount());
             }
 
             @Override
@@ -212,20 +239,131 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
     }
 
     public void sendOrder(View view) {
+        DatabaseReference userCart = FirebaseDatabase
+                .getInstance().getReference("Order").child("Mcdonald");
+        userCart.child("UNIQUE_USER_ID")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists())
+                        {
+//                            Map<String,Object> updateDate = new HashMap<>();
+
+                            List<Object> detailUpdateDate = new ArrayList<>();
+                            for(CartItem cartItem:mAdapter.cartItems){
+                                Map<String,Object> detail = new HashMap<>();
+                                detail.put("name",cartItem.getName());
+                                detail.put("price",cartItem.getPrice());
+                                detail.put("amounts",cartItem.getAmount());
+                                detailUpdateDate.add(detail);
+                            }
+
+                            TextView tvCharge =
+                                    CartActivity.this.findViewById(R.id.txv_delivery_charge_price);
+                            TextView tvDiscount =
+                                    CartActivity.this.findViewById(R.id.txv_discount_price);
+                            TextView tvTotal = CartActivity.this.findViewById(R.id.txv_total_price);
+
+
+                            int totalPrice = 0;
+                            totalPrice = parsePrice(tvTotal.getText().toString()) +
+                                    parsePrice(tvCharge.getText().toString()) -
+                                    parsePrice(tvDiscount.getText().toString());
+//                            updateDate.put("detail", detailUpdateDate);
+//                            updateDate.put("totalPrice", totalPrice);
+//                            updateDate.put("restaurant", "");
+//                            updateDate.put("username", "UNIQUE_USER_ID");
+
+                            UserOrder userOrder = new UserOrder(
+                                    "UNIQUE_USER_ID", "Mcdonald", totalPrice,
+                                    true, detailUpdateDate);
+
+
+                            userCart.child("UNIQUE_USER_ID")
+                                    .setValue(userOrder);
+                        }
+                        else
+                        {
+//                            Map<String,Object> updateDate = new HashMap<>();
+
+                            List<Object> detailUpdateDate = new ArrayList<>();
+                            for(CartItem cartItem:mAdapter.cartItems){
+                                Map<String,Object> detail = new HashMap<>();
+                                detail.put("name",cartItem.getName());
+                                detail.put("price",cartItem.getPrice());
+                                detail.put("amounts",cartItem.getAmount());
+                                detailUpdateDate.add(detail);
+                            }
+
+
+                            TextView tvCharge = CartActivity.this.findViewById(R.id.txv_delivery_charge_price);
+
+                            TextView tvDiscount = CartActivity.this.findViewById(R.id.txv_discount_price);
+
+                            TextView tvTotal = CartActivity.this.findViewById(R.id.txv_total_price);
+
+
+                            int totalPrice = 0;
+                            totalPrice = parsePrice(tvTotal.getText().toString()) +
+                                    parsePrice(tvCharge.getText().toString()) -
+                                    parsePrice(tvDiscount.getText().toString());
+//                            updateDate.put("detail", detailUpdateDate);
+//                            updateDate.put("totalPrice", totalPrice);
+//                            updateDate.put("restaurant", "");
+//                            updateDate.put("username", "UNIQUE_USER_ID");
+                            UserOrder userOrder = new UserOrder(
+                                    "UNIQUE_USER_ID", "Mcdonald", totalPrice,
+                                    true, detailUpdateDate);
+                            userCart.child("UNIQUE_USER_ID")
+                                    .setValue(userOrder);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
         Intent intent = new Intent(this, OrderStatusActivity.class);
         startActivity(intent);
+        finish();
+    }
+
+    private int parsePrice(String s){
+        Pattern p = Pattern.compile("\\d+");
+        String priceStr = s;
+        Matcher m = p.matcher(priceStr);
+        int price = 0;
+        while(m.find()) {
+            price = Integer.parseInt(m.group());
+        }
+        return price;
     }
 
     @Override
     public void onDrinkLoadSuccess(List<CartItem> cartItemList) {
-        TextView t = this.findViewById(R.id.textView7);
-        t.setText(cartItemList.get(0).getName());
-        mAdapter = new CartItemsDataAdapter(this,cartItemList);
+//        TextView t = this.findViewById(R.id.textView7);
+//        t.setText(cartItemList.get(0).getName());
+//        mAdapter = new CartItemsDataAdapter(this,cartItemList);
 //        setupRecyclerView();
     }
 
     @Override
     public void onDrinkLoadFailed(String message) {
 
+    }
+
+    public void reload(View view) {
+        if (Build.VERSION.SDK_INT >= 11) {
+            recreate();
+        } else {
+            Intent intent = getIntent();
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            finish();
+            overridePendingTransition(0, 0);
+
+            startActivity(intent);
+            overridePendingTransition(0, 0);
+        }
     }
 }

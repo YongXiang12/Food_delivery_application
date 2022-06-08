@@ -50,6 +50,10 @@ public class FoodDetailsActivity extends AppCompatActivity {
     private TextView tvComment;
     private ListView lvCustomization;
     private CustomizationAdapter adapter;
+    private String restaurantKey;
+    private String name;
+    private String mark;
+    private String price;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +63,7 @@ public class FoodDetailsActivity extends AppCompatActivity {
         tvAmount = findViewById(R.id.txv_amount);
         tvDish = findViewById(R.id.txv_dish);
         Intent intent = getIntent();
-        String name = intent.getStringExtra("dishName");
+        name = intent.getStringExtra("dishName");
         tvDish.setText(name);
         tvFoodPic = findViewById(R.id.imv_detail_foodpic);
         imgURL = intent.getStringExtra("dishImgURI");
@@ -67,15 +71,15 @@ public class FoodDetailsActivity extends AppCompatActivity {
                 .load(imgURL)
                 .into(tvFoodPic);
         tvMark = findViewById(R.id.txv_mark);
-        String mark = intent.getStringExtra("dishMark");
+        mark = intent.getStringExtra("dishMark");
         tvMark.setText(mark);
         tvPrice = findViewById(R.id.food_price);
-        String price = intent.getStringExtra("dishPrice");
+        price = intent.getStringExtra("dishPrice");
         tvPrice.setText(price);
         tvComment = findViewById(R.id.txv_comment);
         tvComment.setText("Test");
 
-        String restaurantKey = intent.getStringExtra("RestaurantKey");
+        restaurantKey = intent.getStringExtra("RestaurantKey");
         ArrayList<DishesCustomizationItem> customizationList =
                 new ArrayList<DishesCustomizationItem>();
         adapter = new CustomizationAdapter(this,
@@ -134,6 +138,7 @@ public class FoodDetailsActivity extends AppCompatActivity {
 
     public void goReviewActivity(View view) {
         Intent intent = new Intent(this, ReviewActivity.class);
+        intent.putExtra("RestaurantKey", restaurantKey);
         startActivity(intent);
     }
 

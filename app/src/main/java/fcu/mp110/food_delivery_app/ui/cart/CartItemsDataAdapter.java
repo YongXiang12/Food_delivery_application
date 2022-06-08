@@ -9,10 +9,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import fcu.mp110.food_delivery_app.R;
@@ -63,7 +69,7 @@ public class CartItemsDataAdapter
     @Override
     public void onBindViewHolder(@NonNull CartItemViewHolder holder, int position) {
         int pos = position;
-        CartItem item = cartItems.get(position);
+        CartItem item = cartItems.get(pos);
         holder.name.setText(item.getName());
         holder.category.setText(item.getCategory());
         holder.price.setText("$"+String.valueOf(item.getPrice()));
@@ -81,8 +87,10 @@ public class CartItemsDataAdapter
                 holder.price.setText("$"+String.valueOf(price));
                 item.setAmount(amount);
                 item.setPrice(price);
+                cartItems.get(pos).setAmount(amount);
+                cartItems.get(pos).setPrice(price);
                 if (mContext instanceof CartActivity) {
-                    ((CartActivity)mContext).updateCartItems(pos,item);
+//                    ((CartActivity)mContext).updateCartItems(pos,item);
                     ((CartActivity)mContext).setOrderInfo();
                 }
             }
@@ -98,8 +106,10 @@ public class CartItemsDataAdapter
                 holder.price.setText("$"+String.valueOf(price));
                 item.setAmount(amount);
                 item.setPrice(price);
+                cartItems.get(pos).setAmount(amount);
+                cartItems.get(pos).setPrice(price);
                 if (mContext instanceof CartActivity) {
-                    ((CartActivity)mContext).updateCartItems(pos,item);
+//                    ((CartActivity)mContext).updateCartItems(pos,item);
                     ((CartActivity)mContext).setOrderInfo();
                 }
             }
@@ -109,5 +119,17 @@ public class CartItemsDataAdapter
     @Override
     public int getItemCount() {
         return cartItems.size();
+    }
+
+    public void removeItem(int pos) {
+        String name = cartItems.get(pos).getName();
+        cartItems.remove(pos);
+        notifyItemRemoved(pos);
+        notifyItemRangeChanged(pos, getItemCount());
+//        FirebaseDatabase.getInstance()
+//                .getReference("Cart")
+//                .child("UNIQUE_USER_ID")
+//                .child(name)
+//                .removeValue();
     }
 }
