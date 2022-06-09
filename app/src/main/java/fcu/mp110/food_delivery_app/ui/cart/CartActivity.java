@@ -316,7 +316,6 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
         } else {
 
 
-
             AlertDialog.Builder builder = new AlertDialog.Builder(findViewById(R.id.root).getContext());
             builder.setTitle("One more step!");
 
@@ -436,92 +435,114 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
             AlertDialog dialog = builder.create();
             dialog.show();
 
+
+            String[] placeRestaurant = orderPlaceRestaurant.split(" ");
+            DatabaseReference userCart = FirebaseDatabase
+                    .getInstance().getReference("Order").child(placeRestaurant[0]);
+            userCart.child("UNIQUE_USER_ID")
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            List<String> delete = new ArrayList<>();
+                            if (snapshot.exists()) {
+                                //                            Map<String,Object> updateDate = new HashMap<>();
+                                int totalPrice = 0;
+                                List<Object> detailUpdateDate = new ArrayList<>();
+                                for (CartItem cartItem : mAdapter.cartItems) {
+                                    if(cartItem.getCategory()==orderPlaceRestaurant){
+                                        Map<String, Object> detail = new HashMap<>();
+                                        detail.put("name", cartItem.getName());
+                                        detail.put("price", cartItem.getPrice());
+                                        detail.put("amounts", cartItem.getAmount());
+                                        totalPrice = totalPrice + cartItem.getPrice();
+                                        delete.add(cartItem.getName());
+                                        detailUpdateDate.add(detail);
+                                    }
+                                }
+
+//                                TextView tvCharge =
+//                                        CartActivity.this.findViewById(R.id.txv_delivery_charge_price);
+//                                TextView tvDiscount =
+//                                        CartActivity.this.findViewById(R.id.txv_discount_price);
+//                                TextView tvTotal = CartActivity.this.findViewById(R.id.txv_total_price);
+//
+//
+//                                int totalPrice = 0;
+//                                totalPrice = parsePrice(tvTotal.getText().toString()) +
+//                                        parsePrice(tvCharge.getText().toString()) -
+//                                        parsePrice(tvDiscount.getText().toString());
+                                //                            updateDate.put("detail", detailUpdateDate);
+                                //                            updateDate.put("totalPrice", totalPrice);
+                                //                            updateDate.put("restaurant", "");
+                                //                            updateDate.put("username", "UNIQUE_USER_ID");
+
+                                UserOrder userOrder = new UserOrder(
+                                        "UNIQUE_USER_ID", placeRestaurant[0], totalPrice,
+                                        true, true, detailUpdateDate);
+
+
+                                userCart.child("UNIQUE_USER_ID")
+                                        .setValue(userOrder);
+                                for(String del: delete){
+                                    FirebaseDatabase.getInstance()
+                                            .getReference("Cart")
+                                            .child("UNIQUE_USER_ID")
+                                            .child(del)
+                                            .removeValue();
+                                }
+                            } else {
+                                //                            Map<String,Object> updateDate = new HashMap<>();
+                                int totalPrice = 0;
+                                List<Object> detailUpdateDate = new ArrayList<>();
+                                for (CartItem cartItem : mAdapter.cartItems) {
+                                    if(cartItem.getCategory()==orderPlaceRestaurant){
+                                        Map<String, Object> detail = new HashMap<>();
+                                        detail.put("name", cartItem.getName());
+                                        detail.put("price", cartItem.getPrice());
+                                        detail.put("amounts", cartItem.getAmount());
+                                        totalPrice = totalPrice + cartItem.getPrice();
+                                        delete.add(cartItem.getName());
+                                        detailUpdateDate.add(detail);
+                                    }
+                                }
+
+
+//                                TextView tvCharge = CartActivity.this.findViewById(R.id.txv_delivery_charge_price);
+//
+//                                TextView tvDiscount = CartActivity.this.findViewById(R.id.txv_discount_price);
+//
+//                                TextView tvTotal = CartActivity.this.findViewById(R.id.txv_total_price);
+//
+//
+//                                int totalPrice = 0;
+//                                totalPrice = parsePrice(tvTotal.getText().toString()) +
+//                                        parsePrice(tvCharge.getText().toString()) -
+//                                        parsePrice(tvDiscount.getText().toString());
+                                //                            updateDate.put("detail", detailUpdateDate);
+                                //                            updateDate.put("totalPrice", totalPrice);
+                                //                            updateDate.put("restaurant", "");
+                                //                            updateDate.put("username", "UNIQUE_USER_ID");
+                                UserOrder userOrder = new UserOrder(
+                                        "UNIQUE_USER_ID", placeRestaurant[0], totalPrice,
+                                        true, true, detailUpdateDate);
+                                userCart.child("UNIQUE_USER_ID")
+                                        .setValue(userOrder);
+                                for(String del: delete){
+                                    FirebaseDatabase.getInstance()
+                                            .getReference("Cart")
+                                            .child("UNIQUE_USER_ID")
+                                            .child(del)
+                                            .removeValue();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
         }
-        DatabaseReference userCart = FirebaseDatabase
-                .getInstance().getReference("Order").child("Mcdonald");
-        userCart.child("UNIQUE_USER_ID")
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.exists())
-                        {
-//                            Map<String,Object> updateDate = new HashMap<>();
-
-                            List<Object> detailUpdateDate = new ArrayList<>();
-                            for(CartItem cartItem:mAdapter.cartItems){
-                                Map<String,Object> detail = new HashMap<>();
-                                detail.put("name",cartItem.getName());
-                                detail.put("price",cartItem.getPrice());
-                                detail.put("amounts",cartItem.getAmount());
-                                detailUpdateDate.add(detail);
-                            }
-
-                            TextView tvCharge =
-                                    CartActivity.this.findViewById(R.id.txv_delivery_charge_price);
-                            TextView tvDiscount =
-                                    CartActivity.this.findViewById(R.id.txv_discount_price);
-                            TextView tvTotal = CartActivity.this.findViewById(R.id.txv_total_price);
-
-
-                            int totalPrice = 0;
-                            totalPrice = parsePrice(tvTotal.getText().toString()) +
-                                    parsePrice(tvCharge.getText().toString()) -
-                                    parsePrice(tvDiscount.getText().toString());
-//                            updateDate.put("detail", detailUpdateDate);
-//                            updateDate.put("totalPrice", totalPrice);
-//                            updateDate.put("restaurant", "");
-//                            updateDate.put("username", "UNIQUE_USER_ID");
-
-                            UserOrder userOrder = new UserOrder(
-                                    "UNIQUE_USER_ID", "Mcdonald", totalPrice,
-                                    true,true, detailUpdateDate);
-
-
-                            userCart.child("UNIQUE_USER_ID")
-                                    .setValue(userOrder);
-                        }
-                        else
-                        {
-//                            Map<String,Object> updateDate = new HashMap<>();
-
-                            List<Object> detailUpdateDate = new ArrayList<>();
-                            for(CartItem cartItem:mAdapter.cartItems){
-                                Map<String,Object> detail = new HashMap<>();
-                                detail.put("name",cartItem.getName());
-                                detail.put("price",cartItem.getPrice());
-                                detail.put("amounts",cartItem.getAmount());
-                                detailUpdateDate.add(detail);
-                            }
-
-
-                            TextView tvCharge = CartActivity.this.findViewById(R.id.txv_delivery_charge_price);
-
-                            TextView tvDiscount = CartActivity.this.findViewById(R.id.txv_discount_price);
-
-                            TextView tvTotal = CartActivity.this.findViewById(R.id.txv_total_price);
-
-
-                            int totalPrice = 0;
-                            totalPrice = parsePrice(tvTotal.getText().toString()) +
-                                    parsePrice(tvCharge.getText().toString()) -
-                                    parsePrice(tvDiscount.getText().toString());
-//                            updateDate.put("detail", detailUpdateDate);
-//                            updateDate.put("totalPrice", totalPrice);
-//                            updateDate.put("restaurant", "");
-//                            updateDate.put("username", "UNIQUE_USER_ID");
-                            UserOrder userOrder = new UserOrder(
-                                    "UNIQUE_USER_ID", "Mcdonald", totalPrice,
-                                    true,true, detailUpdateDate);
-                            userCart.child("UNIQUE_USER_ID")
-                                    .setValue(userOrder);
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
 //        Intent intent = new Intent(this, OrderStatusActivity.class);
 //        startActivity(intent);
 //        finish();
