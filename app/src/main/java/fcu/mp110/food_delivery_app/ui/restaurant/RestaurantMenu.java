@@ -26,6 +26,9 @@ import fcu.mp110.food_delivery_app.ui.review.ReviewActivity;
 
 public class RestaurantMenu extends AppCompatActivity {
 
+    private String restaurantName;
+    static public String review_restaurant;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +42,9 @@ public class RestaurantMenu extends AppCompatActivity {
                 .load(imgURI)
                 .into(thumbnail);
         // get and set store name
-        String restaurantName = intent.getStringExtra("restaurantName");
+        restaurantName = intent.getStringExtra("restaurantName");
         TextView txvRestaurantName = findViewById(R.id.txv_dish);
+        review_restaurant = restaurantName;
         txvRestaurantName.setText(restaurantName);
 
         String deliveryTime = intent.getStringExtra("deliveryTime");
@@ -57,7 +61,8 @@ public class RestaurantMenu extends AppCompatActivity {
 
         // create a object of myBaseAdapter
         String restaurantKey = intent.getStringExtra("restaurantKey");
-        RestaurantMenuBaseAdapter baseAdapter = new RestaurantMenuBaseAdapter(this, menuGridItems);
+        RestaurantMenuBaseAdapter baseAdapter = new RestaurantMenuBaseAdapter(this,
+                restaurantName, menuGridItems);
         GridView gridView = findViewById(R.id.menu);
         gridView.setAdapter(baseAdapter);
         DatabaseReference menuRef;

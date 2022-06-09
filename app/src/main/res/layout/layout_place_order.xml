@@ -21,6 +21,28 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
+        android:id="@+id/txt_address_detail"
+        android:text="Your Address"
+        android:visibility="gone"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edt_comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your comment"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
         android:text="Delivery Method"
         android:textSize="22sp"
         android:textStyle="bold"
@@ -66,6 +88,11 @@
         android:text="Payment Method"
         android:textSize="22sp"
         android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Spinner
+        android:id="@+id/spi_choose_restaurant"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

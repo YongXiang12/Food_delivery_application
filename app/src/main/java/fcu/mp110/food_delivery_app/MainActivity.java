@@ -1,9 +1,13 @@
 package fcu.mp110.food_delivery_app;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,6 +40,7 @@ import fcu.mp110.food_delivery_app.ui.restaurant.CategoriesItem;
 import fcu.mp110.food_delivery_app.ui.restaurant.RestaurantArrayAdapter;
 import fcu.mp110.food_delivery_app.ui.restaurant.RestaurantItem;
 import fcu.mp110.food_delivery_app.ui.search.SearchPage;
+import fcu.mp110.food_delivery_app.ui.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -96,11 +101,30 @@ public class MainActivity extends AppCompatActivity {
         pro_img.setImageDrawable(image);*/
 
         //測試改變左邊選單個人資料
-        View headerView = navigationView.getHeaderView(0);
-        TextView drawer_name = (TextView) headerView.findViewById(R.id.header_txv_name);
-        TextView drawer_email = (TextView) headerView.findViewById(R.id.header_txv_email);
-        drawer_name.setText("Alan");
-        drawer_email.setText("aa@gmail.com");
+        LoginActivity ts2 = new LoginActivity() ;
+        int tmp = ts2.Success_Login;
+        if(tmp==0){
+            View headerView = navigationView.getHeaderView(0);
+            TextView drawer_name = (TextView) headerView.findViewById(R.id.header_txv_name);
+            TextView drawer_email = (TextView) headerView.findViewById(R.id.header_txv_email);
+            Log.d(TAG, "ts: " + tmp + ", ");
+            drawer_name.setText("");
+            drawer_email.setText("");
+//            ViewGroup vg = findViewById (R.id.header_txv_email);
+//            vg.invalidate();
+
+        }else{
+            View headerView = navigationView.getHeaderView(0);
+            TextView drawer_name = (TextView) headerView.findViewById(R.id.header_txv_name);
+            TextView drawer_email = (TextView) headerView.findViewById(R.id.header_txv_email);
+
+            String email= ts2.Login_detail;
+            Log.d(TAG, "Login_Detail: " + email + ", "+ts2.Login_detail);//(ts1.Login_detail)
+
+            drawer_name.setText("User");
+            drawer_email.setText(email);
+        }
+
 
 
         // Search TextField init

@@ -43,7 +43,7 @@ public class ReviewAdapter extends ArrayAdapter<ReviewItem> {
 
         ReviewItem item = reviewItemList.get(position);
         ImageView ivDescribe = itemLayout.findViewById(R.id.imv_user_icon);
-        ivDescribe.setImageResource(item.getImgResId());
+//        ivDescribe.setImageResource(item.getImgResId());
         TextView tvUserName = itemLayout.findViewById(R.id.txv_user_name);
         tvUserName.setText(item.getUserName());
         TextView tvReview = itemLayout.findViewById(R.id.txv_user_review);

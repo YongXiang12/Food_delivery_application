@@ -2,23 +2,25 @@ package fcu.mp110.food_delivery_app.ui.review;
 
 public class ReviewItem {
 
-    private int imgResId;
+    private String imgResId;
     private String userName;
     private String date;
     private String review;
+    public ReviewItem() {};
+//    public ReviewItem(String s){}
 
-    public ReviewItem(int imgResId, String userName, String date, String review) {
+    public ReviewItem(String imgResId, String userName, String date, String review) {
         this.imgResId = imgResId;
         this.userName = userName;
         this.date = date;
         this.review = review;
     }
 
-    public int getImgResId() {
+    public String getImgResId() {
         return imgResId;
     }
 
-    public void setImgResId(int imgResId) {
+    public void setImgResId(String imgResId) {
         this.imgResId = imgResId;
     }
 

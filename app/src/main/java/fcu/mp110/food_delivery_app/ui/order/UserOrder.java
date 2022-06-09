@@ -6,18 +6,21 @@ public class UserOrder {
     public String username;
     public String restaurant;
     public int totalPrice;
-    public Boolean accept;
+    public Boolean storeAccept;
+    public Boolean delivererAccept;
     public List<Object> orderDetail;
 
     public UserOrder() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public UserOrder(String username, String restaurant, int totalPrice, boolean accept, List<Object> detailUpdateDate) {
+    public UserOrder(String username, String restaurant, int totalPrice, boolean saccept,
+                     boolean daccept, List<Object> detailUpdateDate) {
         this.username = username;
         this.restaurant = restaurant;
         this.totalPrice = totalPrice;
-        this.accept = accept;
+        this.storeAccept = saccept;
+        this.delivererAccept = daccept;
         this.orderDetail = detailUpdateDate;
     }
 }
