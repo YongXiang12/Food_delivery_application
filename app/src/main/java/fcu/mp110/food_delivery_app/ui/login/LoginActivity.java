@@ -27,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 import java.util.Map;
 
+import fcu.mp110.food_delivery_app.MainActivity;
 import fcu.mp110.food_delivery_app.R;
 
 
@@ -100,7 +101,11 @@ public class LoginActivity extends AppCompatActivity  implements OnCompleteListe
             Success_Login=1;
 
             Log.d(TAG, "Testing log: " +Success_Login);
-            finish();
+
+//            finish();
+            Intent back = new Intent();
+            back.setClass(this, MainActivity.class);
+            startActivity(back);
             //addUser();
         } else {
             Success_Login=0;
@@ -108,8 +113,6 @@ public class LoginActivity extends AppCompatActivity  implements OnCompleteListe
         }
     }
 
-    public int getSuccess() {
-        return Success_Login;
-    }
+
 
 }
