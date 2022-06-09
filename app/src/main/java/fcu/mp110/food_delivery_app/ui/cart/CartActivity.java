@@ -420,16 +420,11 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
 
 
             builder.setView(viewForCheck);
-            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.dismiss();
-                }
-            }).setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    Toast.makeText(findViewById(R.id.root).getContext(),
-                            "Implrment late", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(findViewById(R.id.root).getContext(),
+//                            "Implrment late", Toast.LENGTH_SHORT).show();
                 }
             });
             AlertDialog dialog = builder.create();
