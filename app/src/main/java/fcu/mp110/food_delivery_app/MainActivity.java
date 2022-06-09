@@ -113,8 +113,7 @@ public class MainActivity extends AppCompatActivity {
 //            ViewGroup vg = findViewById (R.id.header_txv_email);
 //            vg.invalidate();
 
-        }
-        else{
+        }else{
             View headerView = navigationView.getHeaderView(0);
             TextView drawer_name = (TextView) headerView.findViewById(R.id.header_txv_name);
             TextView drawer_email = (TextView) headerView.findViewById(R.id.header_txv_email);
