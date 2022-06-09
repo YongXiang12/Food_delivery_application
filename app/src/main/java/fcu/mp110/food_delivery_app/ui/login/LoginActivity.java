@@ -1,5 +1,7 @@
 package fcu.mp110.food_delivery_app.ui.login;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -26,8 +28,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import fcu.mp110.food_delivery_app.R;
+
+
 //LOGIN
 public class LoginActivity extends AppCompatActivity  implements OnCompleteListener<AuthResult>{
+
+
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -46,6 +52,7 @@ public class LoginActivity extends AppCompatActivity  implements OnCompleteListe
         setContentView(R.layout.activity_login_new);
 
         etEmail = findViewById(R.id.Email);
+
         etPassword = findViewById(R.id.Password);
 
 
@@ -57,26 +64,43 @@ public class LoginActivity extends AppCompatActivity  implements OnCompleteListe
         it.setClass(this, Login2Activity.class);
         startActivity(it);
     }
+    static public String Login_detail;
 
     public void onLogin(View view){
         String email = etEmail.getText().toString();
+        Login_detail = etEmail.getText().toString();
         String password = etPassword.getText().toString();
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener( this, (OnCompleteListener<AuthResult>) this);
+        Log.d(TAG, "Testing login_account: " +email+", "+Login_detail);
+//        String Login_detail = email;
     }
     public void onCancel(View view){
         finish();
     }
+
+    static public int Success_Login;
+
     @Override
     public void onComplete(@NonNull Task task) {
+
         if (task.isSuccessful()){
             Toast.makeText(this,"Successful", Toast.LENGTH_LONG).show();
+
+            Success_Login=1;
+
+            Log.d(TAG, "Testing log: " +Success_Login);
             finish();
             //addUser();
         } else {
+            Success_Login=0;
             Toast.makeText(this,"Fail", Toast.LENGTH_LONG).show();
         }
+    }
+
+    public int getSuccess() {
+        return Success_Login;
     }
 
 }
