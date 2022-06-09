@@ -37,6 +37,7 @@ import java.util.Map;
 import fcu.mp110.food_delivery_app.R;
 import java.util.Calendar;
 import fcu.mp110.food_delivery_app.ui.login.LoginActivity;
+import fcu.mp110.food_delivery_app.ui.restaurant.RestaurantMenu;
 
 
 
@@ -52,10 +53,14 @@ public class ReviewActivity extends AppCompatActivity {
     private String review_name;
     Date currentTime = Calendar.getInstance().getTime();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review);
+        RestaurantMenu rst1 = new RestaurantMenu();
+        Log.d(TAG, "restaurant : " + rst1.review_restaurant);
+        String review_rest = rst1.review_restaurant;
 
         LoginActivity ts1 = new LoginActivity() ;
         Log.d(TAG, "Success_Login: " + ts1.Success_Login);
@@ -66,7 +71,7 @@ public class ReviewActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("review");
 
-        DatabaseReference myRef2 = myRef.child("review_get");
+        DatabaseReference myRef2 = myRef.child(review_rest);
 
 //        DatabaseReference getID = database.getReference("users");
 

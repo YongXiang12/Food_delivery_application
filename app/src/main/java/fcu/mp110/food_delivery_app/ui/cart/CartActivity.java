@@ -15,8 +15,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Canvas;
+//import android.location.LocationRequest;
 import android.location.Location;
-import android.location.LocationRequest;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
@@ -34,7 +34,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
-//import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -96,7 +96,7 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
     }
 
     private void initLocation() {
-//        buildLocationRequest();
+        buildLocationRequest();
         buildLocationCallback();
         Context context = findViewById(R.id.root).getContext();
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context);
@@ -110,8 +110,8 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-//        fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback,
-//                Looper.getMainLooper());
+        fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback,
+                Looper.getMainLooper());
     }
 
     private void buildLocationCallback() {
@@ -124,12 +124,12 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
         };
     }
 
-//    private void buildLocationRequest() {
-//        locationRequest = new LocationRequest();
-//        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-//        locationRequest.setInterval(5000);
-//        locationRequest.setSmallestDisplacement(10f);
-//    }
+    private void buildLocationRequest() {
+        locationRequest = new LocationRequest();
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setInterval(5000);
+        locationRequest.setSmallestDisplacement(10f);
+    }
 
     public void updateCartItems(int position, CartItem cartItem) {
 //        cartItems.set(position, cartItem);
@@ -334,15 +334,15 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
             DatabaseReference restaurantReference = FirebaseDatabase
                     .getInstance().getReference("Restaurant");
 
-    //        List<String> tempSet = new ArrayList<String>();
+            //        List<String> tempSet = new ArrayList<String>();
             Set<String> words = new LinkedHashSet<>();
             for (CartItem cartItem : mAdapter.cartItems) {
                 String key = cartItem.getCategory();
-    //            tempSet.add(key);
+                //            tempSet.add(key);
                 words.add(key);
             }
 
-    //        String[] stringArray = tempSet.toArray(new String[0]);
+            //        String[] stringArray = tempSet.toArray(new String[0]);
             String[] stringArray = words.toArray(new String[0]);
             ArrayAdapter<String> tempAd = new ArrayAdapter<>(CartActivity.this,
                     android.R.layout.simple_spinner_item, stringArray);
@@ -522,9 +522,9 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
 
                     }
                 });
-        Intent intent = new Intent(this, OrderStatusActivity.class);
-        startActivity(intent);
-        finish();
+//        Intent intent = new Intent(this, OrderStatusActivity.class);
+//        startActivity(intent);
+//        finish();
     }
 
     private int parsePrice(String s) {
@@ -587,8 +587,8 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
                 // for ActivityCompat#requestPermissions for more details.
                 return;
             }
-//            fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback,
-//                Looper.getMainLooper());
+        fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback,
+                Looper.getMainLooper());
     }
 
 }

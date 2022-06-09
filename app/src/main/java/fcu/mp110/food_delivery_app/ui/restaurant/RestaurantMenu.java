@@ -27,6 +27,7 @@ import fcu.mp110.food_delivery_app.ui.review.ReviewActivity;
 public class RestaurantMenu extends AppCompatActivity {
 
     private String restaurantName;
+    static public String review_restaurant;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,7 @@ public class RestaurantMenu extends AppCompatActivity {
         // get and set store name
         restaurantName = intent.getStringExtra("restaurantName");
         TextView txvRestaurantName = findViewById(R.id.txv_dish);
+        review_restaurant = restaurantName;
         txvRestaurantName.setText(restaurantName);
 
         String deliveryTime = intent.getStringExtra("deliveryTime");
