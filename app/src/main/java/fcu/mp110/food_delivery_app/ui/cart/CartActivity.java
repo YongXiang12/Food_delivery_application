@@ -477,7 +477,7 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
                                 //                            updateDate.put("username", "UNIQUE_USER_ID");
 
                                 UserOrder userOrder = new UserOrder(
-                                        "UNIQUE_USER_ID", placeRestaurant[0], totalPrice,
+                                        "UNIQUE_USER_ID", placeRestaurant[1], totalPrice,
                                         true, true, detailUpdateDate);
 
 
@@ -523,7 +523,7 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
                                 //                            updateDate.put("restaurant", "");
                                 //                            updateDate.put("username", "UNIQUE_USER_ID");
                                 UserOrder userOrder = new UserOrder(
-                                        "UNIQUE_USER_ID", placeRestaurant[0], totalPrice,
+                                        "UNIQUE_USER_ID", placeRestaurant[1], totalPrice,
                                         true, true, detailUpdateDate);
                                 userCart.child("UNIQUE_USER_ID")
                                         .setValue(userOrder);
