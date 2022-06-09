@@ -74,6 +74,15 @@ public class LoginActivity extends AppCompatActivity  implements OnCompleteListe
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener( this, (OnCompleteListener<AuthResult>) this);
         Log.d(TAG, "Testing login_account: " +email+", "+Login_detail);
+
+//        View headerView = navigationView.getHeaderView(0);
+//        TextView drawer_name = (TextView) headerView.findViewById(R.id.header_txv_name);
+//        TextView drawer_email = (TextView) headerView.findViewById(R.id.header_txv_email);
+//        LoginActivity ts2 = new LoginActivity() ;
+//        Log.d(TAG, "Login_Detail: " + email + ", "+ts2.Login_detail);//(ts1.Login_detail)
+//
+//        drawer_name.setText("User");
+//        drawer_email.setText(email);
 //        String Login_detail = email;
     }
     public void onCancel(View view){
