@@ -46,6 +46,7 @@ public class ModifyItemActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapt);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+
     }
 
 

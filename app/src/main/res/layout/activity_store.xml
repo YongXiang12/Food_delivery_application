@@ -10,7 +10,7 @@
         android:id="@+id/Store_name"
         android:layout_width="150dp"
         android:layout_height="35dp"
-        android:text="店家名稱"
+        android:text="Mcdonald"
         android:textAlignment="center"
         android:textSize="25sp"
         android:textStyle="bold"

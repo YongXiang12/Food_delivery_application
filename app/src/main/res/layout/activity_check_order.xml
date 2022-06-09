@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".ui.store.CheckOrderActivity">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/order_button_recycler"
+        android:layout_width="379dp"
+        android:layout_height="624dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.607" />
+
     <TextView
         android:id="@+id/commentNum"
         android:layout_width="88dp"
@@ -20,25 +30,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
 
-    <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="624dp"
-        android:gravity="center|top"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
-
-        <Button
-            android:id="@+id/button7"
-            android:layout_width="394dp"
-            android:layout_height="62dp"
-            android:background="@drawable/checkorderbutton"
-            android:onClick="orderDetail"
-            android:text="訂單#1 - 8:00"
-            android:textSize="23sp"
-            android:textStyle="bold" />
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
