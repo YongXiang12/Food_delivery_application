@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -45,7 +46,7 @@ public class RestaurantArrayAdapter extends RecyclerView.Adapter<RestaurantArray
         public TextView restaurantLabel;
         public TextView txv_commentNum;
         public CardView cardView;
-
+        public ToggleButton toggleButton;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -56,6 +57,8 @@ public class RestaurantArrayAdapter extends RecyclerView.Adapter<RestaurantArray
             txv_commentNum = itemView.findViewById(R.id.commentNum);
             cardView = itemView.findViewById(R.id.cardview_restaurant);
             cardView.setOnClickListener(this);
+            toggleButton = itemView.findViewById(R.id.toggle_favorite);
+            toggleButton.setOnClickListener(this);
 
         }
 

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -37,6 +38,7 @@ import fcu.mp110.food_delivery_app.R;
 import fcu.mp110.food_delivery_app.ui.cart.CartActivity;
 import fcu.mp110.food_delivery_app.ui.cart.CartItem;
 import fcu.mp110.food_delivery_app.ui.cart.CartItemsDataAdapter;
+import fcu.mp110.food_delivery_app.ui.login.LoginActivity;
 import fcu.mp110.food_delivery_app.ui.review.ReviewActivity;
 
 public class FoodDetailsActivity extends AppCompatActivity {
@@ -144,75 +146,86 @@ public class FoodDetailsActivity extends AppCompatActivity {
     }
 
     public void goCartActivity(View view) {
-        Intent intent = new Intent(this, CartActivity.class);
-        DatabaseReference userCart = FirebaseDatabase
-                .getInstance().getReference("Cart").child("UNIQUE_USER_ID");
-        userCart.child(tvDish.getText().toString())
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.exists())
-                        {
-                            Map<String,Object> updateDate = new HashMap<>();
-                            String quantity = tvAmount.getText().toString();
-                            updateDate.put("amount", Integer.parseInt(quantity));
-                            Pattern p = Pattern.compile("\\d+");
-                            String priceStr = tvPrice.getText().toString();
-                            Matcher m = p.matcher(priceStr);
-                            int price = 0;
-                            while(m.find()) {
-                                price = Integer.parseInt(m.group());
+
+        LoginActivity ts2 = new LoginActivity();
+        int tmp = ts2.Success_Login;
+        if(tmp == 0){
+            Toast tos = Toast.makeText(this,"Please Login",Toast.LENGTH_LONG);
+            tos.show();
+        }
+        else {
+                String name = (ts2.Login_detail).split("[@]")[0];
+                Intent intent = new Intent(this, CartActivity.class);
+                DatabaseReference userCart = FirebaseDatabase
+                        .getInstance().getReference("Cart").child(name);
+                userCart.child(tvDish.getText().toString())
+                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if(snapshot.exists())
+                                {
+                                    Map<String,Object> updateDate = new HashMap<>();
+                                    String quantity = tvAmount.getText().toString();
+                                    updateDate.put("amount", Integer.parseInt(quantity));
+                                    Pattern p = Pattern.compile("\\d+");
+                                    String priceStr = tvPrice.getText().toString();
+                                    Matcher m = p.matcher(priceStr);
+                                    int price = 0;
+                                    while(m.find()) {
+                                        price = Integer.parseInt(m.group());
+                                    }
+                                    updateDate.put("price", price*Integer.parseInt(quantity));
+                                    updateDate.put("category", restaurantKey+" "+restaurantName);
+                                    updateDate.put("image", imgURL);
+                                    updateDate.put("name", tvDish.getText().toString());
+                                    userCart.child(tvDish.getText().toString())
+                                            .updateChildren(updateDate);
+    //                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+    //                                        @Override
+    //                                        public void onSuccess(Void unused) {
+    //                                            Snackbar.make(findViewById(R.id.root),
+    //                                                    "Add to Cart Success!",
+    //                                                    Snackbar.LENGTH_LONG).show();
+    //                                        }
+    //                                    })
+    //                                    .addOnFailureListener(new OnFailureListener() {
+    //                                        @Override
+    //                                        public void onFailure(@NonNull Exception e) {
+    //                                            Snackbar.make(findViewById(R.id.root),
+    //                                                    "Add to Cart Fail!",
+    //                                                    Snackbar.LENGTH_LONG).show();
+    //                                        }
+    //                                    });
+                                }
+                                else
+                                {
+                                    Map<String,Object> updateDate = new HashMap<>();
+                                    String quantity = tvAmount.getText().toString();
+                                    updateDate.put("amount", Integer.parseInt(quantity));
+                                    Pattern p = Pattern.compile("\\d+");
+                                    String priceStr = tvPrice.getText().toString();
+                                    Matcher m = p.matcher(priceStr);
+                                    int price = 0;
+                                    while(m.find()) {
+                                        price = Integer.parseInt(m.group());
+                                    }
+                                    updateDate.put("price", price*Integer.parseInt(quantity));
+                                    updateDate.put("category", restaurantKey+" "+restaurantName);
+                                    updateDate.put("image", imgURL);
+                                    updateDate.put("name", tvDish.getText().toString());
+                                    userCart.child(tvDish.getText().toString())
+                                            .setValue(updateDate);
+                                }
                             }
-                            updateDate.put("price", price*Integer.parseInt(quantity));
-                            updateDate.put("category", restaurantKey+" "+restaurantName);
-                            updateDate.put("image", imgURL);
-                            updateDate.put("name", tvDish.getText().toString());
-                            userCart.child(tvDish.getText().toString())
-                                    .updateChildren(updateDate);
-//                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                        @Override
-//                                        public void onSuccess(Void unused) {
-//                                            Snackbar.make(findViewById(R.id.root),
-//                                                    "Add to Cart Success!",
-//                                                    Snackbar.LENGTH_LONG).show();
-//                                        }
-//                                    })
-//                                    .addOnFailureListener(new OnFailureListener() {
-//                                        @Override
-//                                        public void onFailure(@NonNull Exception e) {
-//                                            Snackbar.make(findViewById(R.id.root),
-//                                                    "Add to Cart Fail!",
-//                                                    Snackbar.LENGTH_LONG).show();
-//                                        }
-//                                    });
-                        }
-                        else
-                        {
-                            Map<String,Object> updateDate = new HashMap<>();
-                            String quantity = tvAmount.getText().toString();
-                            updateDate.put("amount", Integer.parseInt(quantity));
-                            Pattern p = Pattern.compile("\\d+");
-                            String priceStr = tvPrice.getText().toString();
-                            Matcher m = p.matcher(priceStr);
-                            int price = 0;
-                            while(m.find()) {
-                                price = Integer.parseInt(m.group());
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
                             }
-                            updateDate.put("price", price*Integer.parseInt(quantity));
-                            updateDate.put("category", restaurantKey+" "+restaurantName);
-                            updateDate.put("image", imgURL);
-                            updateDate.put("name", tvDish.getText().toString());
-                            userCart.child(tvDish.getText().toString())
-                                    .setValue(updateDate);
-                        }
-                    }
+                        });
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                startActivity(intent);
+            }
+        }
 
-                    }
-                });
-
-        startActivity(intent);
-    }
 }

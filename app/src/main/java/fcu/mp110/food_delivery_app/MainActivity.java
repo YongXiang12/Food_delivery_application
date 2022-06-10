@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,6 +33,7 @@ import java.util.ArrayList;
 import fcu.mp110.food_delivery_app.databinding.ActivityMainBinding;
 
 import fcu.mp110.food_delivery_app.ui.cart.CartActivity;
+import fcu.mp110.food_delivery_app.ui.delivery.DeliveryActivity;
 import fcu.mp110.food_delivery_app.ui.favorite.FavoriteActivity;
 import fcu.mp110.food_delivery_app.ui.restaurant.CategoriesArrayAdapter;
 import fcu.mp110.food_delivery_app.ui.restaurant.CategoriesItem;
@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Intent intent = new Intent(this, DeliveryActivity.class);
+        //startActivity(intent);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         Toolbar tb = (Toolbar) findViewById(R.id.toolbar);

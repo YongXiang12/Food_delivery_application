@@ -26,7 +26,7 @@ import fcu.mp110.food_delivery_app.ui.review.ReviewActivity;
 
 public class RestaurantMenu extends AppCompatActivity {
 
-    private String restaurantName;
+    public String restaurantName;
     static public String review_restaurant;
 
     @Override

@@ -71,6 +71,7 @@ public class LoginActivity extends AppCompatActivity  implements OnCompleteListe
         String email = etEmail.getText().toString();
         Login_detail = etEmail.getText().toString();
         String password = etPassword.getText().toString();
+
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener( this, (OnCompleteListener<AuthResult>) this);

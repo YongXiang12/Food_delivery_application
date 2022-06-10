@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.store.StoreActivity">
+    tools:context=".ui.delivery.DeliveryActivity">
 
     <TextView
         android:id="@+id/delivery_name"
         android:layout_width="150dp"
         android:layout_height="35dp"
-        android:text="Mcdonald"
+        android:text="外送員"
         android:textAlignment="center"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -51,9 +51,9 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20px"
             android:background="@drawable/while_nostroke_corner"
-            android:onClick="CheckOrder"
+            android:onClick="SelectionOrder"
             android:paddingEnd="20px"
-            android:text="查詢訂單"
+            android:text="接單功能"
             android:textColor="#FFF34D85"
             android:textSize="23sp"
             android:textStyle="bold" />
@@ -65,18 +65,7 @@
             android:layout_marginBottom="20px"
             android:background="@drawable/while_nostroke_corner"
             android:onClick="ModitfyItems"
-            android:text="調整/新增菜單"
-            android:textColor="#FFF34D85"
-            android:textSize="23sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="284dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20px"
-            android:background="@drawable/while_nostroke_corner"
-            android:text="查看自身評價"
+            android:text="歷史訂單查詢"
             android:textColor="#FFF34D85"
             android:textSize="23sp"
             android:textStyle="bold" />

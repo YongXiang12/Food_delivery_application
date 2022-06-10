@@ -1,5 +1,7 @@
 package fcu.mp110.food_delivery_app.ui.cart;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +22,7 @@ import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -82,6 +85,11 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
     private String mark;
     private String price;
 
+    LoginActivity ts2;
+    int tmp;
+    String tmp2;
+    String[] cut;
+    String ordername;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,10 +98,18 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
 
 
 //        setPlayersDataAdapter();
-        loadDrinkFromFirebase();
+
 //        setupRecyclerView();
+        ts2 = new LoginActivity();
+        tmp = ts2.Success_Login;
+        cut = (ts2.Login_detail).split("[@]");
+        ordername = cut[0];
+        Log.d(TAG, "Testi " + ordername);
+        loadDrinkFromFirebase();
         initLocation();
     }
+
+
 
     private void initLocation() {
         buildLocationRequest();
@@ -181,6 +197,7 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
     }
 
     private void loadDrinkFromFirebase() {
+
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.lv_oders);
         List<CartItem> cartItems = new ArrayList<>();
         mAdapter = new CartItemsDataAdapter(this, cartItems);
@@ -188,7 +205,7 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
         recyclerView.setAdapter(mAdapter);
         FirebaseDatabase.getInstance()
                 .getReference("Cart")
-                .child("UNIQUE_USER_ID")
+                .child(ordername)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -229,7 +246,7 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 FirebaseDatabase.getInstance()
                                         .getReference("Cart")
-                                        .child("UNIQUE_USER_ID")
+                                        .child(ordername)
                                         .child(del)
                                         .removeValue();
 //                                cartItems = new ArrayList<>();
@@ -308,8 +325,7 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
     }
 
     public void sendOrder(View view) {
-        LoginActivity ts2 = new LoginActivity();
-        int tmp = ts2.Success_Login;
+
         if (tmp == 0) {
             Toast tos = Toast.makeText(this,"Please Login",Toast.LENGTH_LONG);
             tos.show();
@@ -359,14 +375,14 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
                 }
             });
             String orderPlaceRestaurant = (String) spiChooseRestaurant.getSelectedItem();
-            edtAddress.setText(orderPlaceRestaurant + "407台中市西屯區文華路100號");
+            edtAddress.setText(orderPlaceRestaurant + "407台中市西屯區文華路2號");
 
 
             rdiHome.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                     if (b) {
-                        edtAddress.setText("407台中市西屯區文華路100號");
+                        edtAddress.setText("407台中市西屯區文華路2號");
                         txtAddress.setVisibility(View.VISIBLE);
                     }
                 }
@@ -433,8 +449,8 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
 
             String[] placeRestaurant = orderPlaceRestaurant.split(" ");
             DatabaseReference userCart = FirebaseDatabase
-                    .getInstance().getReference("Order").child(placeRestaurant[0]);
-            userCart.child("UNIQUE_USER_ID")
+                    .getInstance().getReference("Order").child(placeRestaurant[1]);
+            userCart.child(ordername)
                     .addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -444,7 +460,7 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
                                 int totalPrice = 0;
                                 List<Object> detailUpdateDate = new ArrayList<>();
                                 for (CartItem cartItem : mAdapter.cartItems) {
-                                    if(cartItem.getCategory()==orderPlaceRestaurant){
+                                    if(cartItem.getCategory().equals(orderPlaceRestaurant)){
                                         Map<String, Object> detail = new HashMap<>();
                                         detail.put("name", cartItem.getName());
                                         detail.put("price", cartItem.getPrice());
@@ -472,16 +488,16 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
                                 //                            updateDate.put("username", "UNIQUE_USER_ID");
 
                                 UserOrder userOrder = new UserOrder(
-                                        "UNIQUE_USER_ID", placeRestaurant[1], totalPrice,
-                                        true, true, detailUpdateDate);
+                                        ordername, placeRestaurant[1], totalPrice,
+                                        true, false, detailUpdateDate);
 
 
-                                userCart.child("UNIQUE_USER_ID")
+                                userCart.child(ordername)
                                         .setValue(userOrder);
                                 for(String del: delete){
                                     FirebaseDatabase.getInstance()
                                             .getReference("Cart")
-                                            .child("UNIQUE_USER_ID")
+                                            .child(ordername)
                                             .child(del)
                                             .removeValue();
                                 }
@@ -490,7 +506,7 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
                                 int totalPrice = 0;
                                 List<Object> detailUpdateDate = new ArrayList<>();
                                 for (CartItem cartItem : mAdapter.cartItems) {
-                                    if(cartItem.getCategory()==orderPlaceRestaurant){
+                                    if(cartItem.getCategory().equals(orderPlaceRestaurant)){
                                         Map<String, Object> detail = new HashMap<>();
                                         detail.put("name", cartItem.getName());
                                         detail.put("price", cartItem.getPrice());
@@ -518,14 +534,14 @@ public class CartActivity extends AppCompatActivity implements IDrinkLoadListene
                                 //                            updateDate.put("restaurant", "");
                                 //                            updateDate.put("username", "UNIQUE_USER_ID");
                                 UserOrder userOrder = new UserOrder(
-                                        "UNIQUE_USER_ID", placeRestaurant[1], totalPrice,
-                                        true, true, detailUpdateDate);
-                                userCart.child("UNIQUE_USER_ID")
+                                        ordername, placeRestaurant[1], totalPrice,
+                                        true, false, detailUpdateDate);
+                                userCart.child(ordername)
                                         .setValue(userOrder);
                                 for(String del: delete){
                                     FirebaseDatabase.getInstance()
                                             .getReference("Cart")
-                                            .child("UNIQUE_USER_ID")
+                                            .child(ordername)
                                             .child(del)
                                             .removeValue();
                                 }

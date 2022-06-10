@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nav4.NoActionBar"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".ui.delivery.SelOrderDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.delivery.SelectionOrder"
+            android:exported="false" />
         <activity
             android:name=".ui.favorite.FavoriteActivity"
             android:exported="false" />
@@ -64,6 +71,9 @@
             android:name=".ui.login.Login2Activity"
             android:exported="false" />
         <activity
+            android:name=".ui.delivery.DeliveryActivity"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
@@ -75,7 +85,6 @@
             </intent-filter>
         </activity>
     </application>
-
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 </manifest>
